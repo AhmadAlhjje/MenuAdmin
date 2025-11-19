@@ -1,0 +1,41 @@
+import { create } from 'zustand';
+import { Notification } from '@/types';
+
+interface NotificationStore {
+  notifications: Notification[];
+  addNotification: (notification: Omit<Notification, 'id'>) => void;
+  removeNotification: (id: string) => void;
+  clearNotifications: () => void;
+}
+
+export const useNotificationStore = create<NotificationStore>((set) => ({
+  notifications: [],
+
+  addNotification: (notification) => {
+    const id = Date.now().toString();
+    const newNotification = { ...notification, id };
+
+    set((state) => ({
+      notifications: [...state.notifications, newNotification],
+    }));
+
+    // Auto remove after duration
+    if (notification.duration !== 0) {
+      setTimeout(() => {
+        set((state) => ({
+          notifications: state.notifications.filter((n) => n.id !== id),
+        }));
+      }, notification.duration || 3000);
+    }
+  },
+
+  removeNotification: (id) => {
+    set((state) => ({
+      notifications: state.notifications.filter((n) => n.id !== id),
+    }));
+  },
+
+  clearNotifications: () => {
+    set({ notifications: [] });
+  },
+}));
