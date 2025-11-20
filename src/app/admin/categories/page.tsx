@@ -10,7 +10,8 @@ import { categoryService } from '@/api/services/categoryService';
 import { useNotification } from '@/hooks/useNotification';
 import { useAsync } from '@/hooks/useAsync';
 import { Category } from '@/types';
-import { Edit2, Trash2, Plus } from 'lucide-react';
+import { Edit2, Trash2, Plus, Grid3x3, Layers, ArrowUpDown } from 'lucide-react';
+import clsx from 'clsx';
 
 export default function CategoriesPage() {
   const { t, i18n } = useTranslation();
@@ -31,8 +32,9 @@ export default function CategoriesPage() {
       await categoryService.createCategory(formData);
       notify.success(t('categories.createSuccess'));
       setIsModalOpen(false);
-      refetch();
+      await refetch();
     } catch (error) {
+      console.error('Create error:', error);
       notify.error(t('errors.serverError'));
     }
   };
@@ -44,8 +46,9 @@ export default function CategoriesPage() {
       notify.success(t('categories.updateSuccess'));
       setIsModalOpen(false);
       setSelectedCategory(null);
-      refetch();
+      await refetch();
     } catch (error) {
+      console.error('Update error:', error);
       notify.error(t('errors.serverError'));
     }
   };
@@ -55,8 +58,9 @@ export default function CategoriesPage() {
       await categoryService.deleteCategory(id);
       notify.success(t('categories.deleteSuccess'));
       setDeleteConfirm(null);
-      refetch();
+      await refetch();
     } catch (error) {
+      console.error('Delete error:', error);
       notify.error(t('errors.serverError'));
     }
   };
@@ -77,68 +81,138 @@ export default function CategoriesPage() {
 
   const categories = categoriesData?.data || [];
 
+  // Get category colors based on index
+  const getCategoryColor = (index: number) => {
+    const colors = [
+      'bg-primary-100 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400',
+      'bg-success-100 dark:bg-success-900/20 text-success-600 dark:text-success-400',
+      'bg-info-100 dark:bg-info-900/20 text-info-600 dark:text-info-400',
+      'bg-warning-100 dark:bg-warning-900/20 text-warning-600 dark:text-warning-400',
+      'bg-danger-100 dark:bg-danger-900/20 text-danger-600 dark:text-danger-400',
+      'bg-secondary-100 dark:bg-secondary-700 text-secondary-600 dark:text-secondary-400',
+    ];
+    return colors[index % colors.length];
+  };
+
   return (
     <>
       <Header title={t('categories.title')} description={t('categories.list')} />
 
       <div className="p-8">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-secondary-900 dark:text-secondary-100">
-            {t('categories.list')}
-          </h2>
-          <Button onClick={() => handleOpenModal()} className="flex items-center gap-2">
-            <Plus size={20} />
-            {t('categories.add')}
-          </Button>
+        {/* Header Section */}
+        <div className="mb-8">
+          <div className="flex justify-between items-center">
+            <div>
+              <h2 className="text-2xl font-bold text-secondary-900 dark:text-secondary-100">
+                {t('categories.list')}
+              </h2>
+              <p className="text-sm text-secondary-600 dark:text-secondary-400 mt-1">
+                {categories.length} {categories.length === 1 ? t('categories.category') : t('categories.categories')}
+              </p>
+            </div>
+            <Button onClick={() => handleOpenModal()} className="flex items-center gap-2">
+              <Plus size={20} />
+              {t('categories.add')}
+            </Button>
+          </div>
         </div>
 
+        {/* Loading State */}
         {status === 'loading' && (
           <Card>
-            <div className="flex justify-center py-12">
-              <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-500 border-t-transparent"></div>
+            <div className="flex flex-col items-center justify-center py-16">
+              <div className="animate-spin rounded-full h-12 w-12 border-3 border-primary-500 border-t-transparent mb-4"></div>
+              <p className="text-secondary-600 dark:text-secondary-400">{t('common.loading')}...</p>
             </div>
           </Card>
         )}
 
+        {/* Empty State */}
         {status === 'success' && categories.length === 0 && (
           <Card>
-            <div className="text-center py-12">
-              <p className="text-secondary-500">{t('categories.noCategories')}</p>
+            <div className="flex flex-col items-center justify-center py-16">
+              <div className="w-20 h-20 rounded-full bg-secondary-100 dark:bg-secondary-800 flex items-center justify-center mb-4">
+                <Grid3x3 size={40} className="text-secondary-400" />
+              </div>
+              <h3 className="text-lg font-semibold text-secondary-900 dark:text-secondary-100 mb-2">
+                {t('categories.noCategories')}
+              </h3>
+              <p className="text-sm text-secondary-600 dark:text-secondary-400 mb-6 text-center max-w-md">
+                {t('categories.noCategoriesDescription')}
+              </p>
+              <Button onClick={() => handleOpenModal()} className="flex items-center gap-2">
+                <Plus size={18} />
+                {t('categories.addFirst')}
+              </Button>
             </div>
           </Card>
         )}
 
+        {/* Categories Grid */}
         {status === 'success' && categories.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category) => (
-              <Card key={category.id} className="flex flex-col" dir={isRTL ? 'rtl' : 'ltr'}>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-secondary-900 dark:text-secondary-100">
-                    {isRTL ? category.nameAr : category.name}
-                  </h3>
-                  <p className="text-sm text-secondary-600 dark:text-secondary-400 mt-2">
-                    {category.description}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {categories.map((category, index) => (
+              <Card
+                key={category.id}
+                className="flex flex-col hover:shadow-lg transition-all duration-200 group"
+                dir={isRTL ? 'rtl' : 'ltr'}
+              >
+                {/* Category Icon & Header */}
+                <div className="flex items-start gap-3 mb-4">
+                  <div className={clsx(
+                    'w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110',
+                    getCategoryColor(index)
+                  )}>
+                    <Layers size={24} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-bold text-secondary-900 dark:text-secondary-100 truncate">
+                      {isRTL ? category.nameAr : category.name}
+                    </h3>
+                    {category.displayOrder > 0 && (
+                      <div className="flex items-center gap-1 text-xs text-secondary-500 dark:text-secondary-400 mt-1">
+                        <ArrowUpDown size={12} />
+                        <span>{t('categories.order')}: {category.displayOrder}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div className="flex-1 mb-4">
+                  <p className="text-sm text-secondary-600 dark:text-secondary-400 line-clamp-3">
+                    {category.description || t('categories.noDescription')}
                   </p>
                 </div>
 
-                <div className="flex gap-2 mt-4 pt-4 border-t border-secondary-200 dark:border-secondary-700">
+                {/* Alternative Name Badge */}
+                {((isRTL && category.name) || (!isRTL && category.nameAr)) && (
+                  <div className="mb-4">
+                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-secondary-100 dark:bg-secondary-800 text-xs text-secondary-700 dark:text-secondary-300">
+                      <span className="font-medium">{isRTL ? category.name : category.nameAr}</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Action Buttons */}
+                <div className="grid grid-cols-2 gap-2 pt-4 border-t border-secondary-200 dark:border-secondary-700">
                   <Button
                     variant="secondary"
                     size="sm"
                     onClick={() => handleOpenModal(category)}
-                    className="flex-1"
+                    className="flex items-center justify-center gap-2"
                   >
                     <Edit2 size={16} />
-                    {t('common.edit')}
+                    <span>{t('common.edit')}</span>
                   </Button>
                   <Button
                     variant="danger"
                     size="sm"
                     onClick={() => setDeleteConfirm(category.id)}
-                    className="flex-1"
+                    className="flex items-center justify-center gap-2"
                   >
                     <Trash2 size={16} />
-                    {t('common.delete')}
+                    <span>{t('common.delete')}</span>
                   </Button>
                 </div>
               </Card>
@@ -146,10 +220,22 @@ export default function CategoriesPage() {
           </div>
         )}
 
+        {/* Error State */}
         {status === 'error' && (
           <Card>
-            <div className="text-center py-12">
-              <p className="text-danger-600">{t('errors.serverError')}</p>
+            <div className="flex flex-col items-center justify-center py-16">
+              <div className="w-20 h-20 rounded-full bg-danger-100 dark:bg-danger-900/20 flex items-center justify-center mb-4">
+                <Grid3x3 size={40} className="text-danger-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-danger-600 mb-2">
+                {t('errors.serverError')}
+              </h3>
+              <p className="text-sm text-secondary-600 dark:text-secondary-400 mb-6">
+                {t('errors.tryAgain')}
+              </p>
+              <Button onClick={() => refetch()} variant="secondary">
+                {t('common.retry')}
+              </Button>
             </div>
           </Card>
         )}
@@ -188,7 +274,9 @@ export default function CategoriesPage() {
           </div>
         }
       >
-        <p>{t('categories.deleteConfirm')}</p>
+        <p className="text-secondary-700 dark:text-secondary-300">
+          {t('categories.deleteConfirm')}
+        </p>
       </Modal>
     </>
   );

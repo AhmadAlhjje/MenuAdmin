@@ -15,7 +15,8 @@ export interface MenuItem {
   nameAr: string;
   description: string;
   price: number;
-  image: string;
+  image?: string; // Deprecated - kept for backward compatibility
+  images: string[]; // New field - array of image URLs (max 5)
   preparationTime: number;
   displayOrder: number;
   isAvailable: boolean;
@@ -25,10 +26,13 @@ export interface MenuItem {
 
 export interface Table {
   id: number;
+  restaurantId: number;
   tableNumber: string;
   capacity: number;
   location: string;
   qrCode: string;
+  qrCodeImage: string;
+  status: 'available' | 'occupied' | 'reserved';
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
