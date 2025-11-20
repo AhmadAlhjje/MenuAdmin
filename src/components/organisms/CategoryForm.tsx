@@ -24,7 +24,6 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
     name: initialData?.name || '',
     nameAr: initialData?.nameAr || '',
     description: initialData?.description || '',
-    displayOrder: initialData?.displayOrder || 0,
   });
 
   const validate = () => {
@@ -84,16 +83,6 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             as="textarea"
-          />
-
-          <Input
-            label={t('categories.displayOrder')}
-            type="number"
-            min="0"
-            value={formData.displayOrder.toString()}
-            onChange={(e) =>
-              setFormData({ ...formData, displayOrder: parseInt(e.target.value) || 0 })
-            }
           />
         </div>
 

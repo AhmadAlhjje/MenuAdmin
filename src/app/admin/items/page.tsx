@@ -44,6 +44,7 @@ export default function ItemsPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<number>(0);
+  const [availabilityFilter, setAvailabilityFilter] = useState<'all' | 'available' | 'unavailable'>('all');
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [existingImages, setExistingImages] = useState<string[]>([]);
@@ -235,7 +236,7 @@ export default function ItemsPage() {
     return colors[index % colors.length];
   };
 
-  // Filter items based on search term and category
+  // Filter items based on search term, category, and availability
   const filteredItems = useMemo(() => {
     const searchLower = searchTerm.toLowerCase();
 
@@ -256,9 +257,14 @@ export default function ItemsPage() {
 
       const matchesCategory = selectedCategoryFilter === 0 || item.categoryId === selectedCategoryFilter;
 
-      return matchesSearch && matchesCategory;
+      const matchesAvailability =
+        availabilityFilter === 'all' ||
+        (availabilityFilter === 'available' && item.isAvailable) ||
+        (availabilityFilter === 'unavailable' && !item.isAvailable);
+
+      return matchesSearch && matchesCategory && matchesAvailability;
     });
-  }, [items, categories, searchTerm, selectedCategoryFilter]);
+  }, [items, categories, searchTerm, selectedCategoryFilter, availabilityFilter]);
 
   // No need to separate items anymore - showing status as tags
 
@@ -287,49 +293,100 @@ export default function ItemsPage() {
 
         {/* Filters Section */}
         <Card className="mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4" dir={isRTL ? 'rtl' : 'ltr'}>
-            {/* Search */}
-            <div className="relative">
-              <Search size={20} className="absolute top-3 left-3 text-secondary-400" />
-              <input
-                type="text"
-                placeholder={isRTL ? 'ابحث عن صنف...' : 'Search items...'}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className={clsx(
-                  'w-full pl-10 pr-4 py-2 rounded-lg border-2',
-                  'bg-white dark:bg-secondary-800',
-                  'border-secondary-200 dark:border-secondary-700',
-                  'text-secondary-900 dark:text-secondary-100',
-                  'placeholder-secondary-400 dark:placeholder-secondary-600',
-                  'focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20',
-                  'transition-colors'
-                )}
-              />
+          <div className="space-y-4" dir={isRTL ? 'rtl' : 'ltr'}>
+            {/* Search and Category Row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Search */}
+              <div className="relative">
+                <Search size={20} className="absolute top-3 left-3 text-secondary-400" />
+                <input
+                  type="text"
+                  placeholder={isRTL ? 'ابحث عن صنف...' : 'Search items...'}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className={clsx(
+                    'w-full pl-10 pr-4 py-2 rounded-lg border-2',
+                    'bg-white dark:bg-secondary-800',
+                    'border-secondary-200 dark:border-secondary-700',
+                    'text-secondary-900 dark:text-secondary-100',
+                    'placeholder-secondary-400 dark:placeholder-secondary-600',
+                    'focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20',
+                    'transition-colors'
+                  )}
+                />
+              </div>
+
+              {/* Category Filter */}
+              <div className="relative">
+                <Filter size={20} className="absolute top-3 left-3 text-secondary-400" />
+                <select
+                  value={selectedCategoryFilter}
+                  onChange={(e) => setSelectedCategoryFilter(parseInt(e.target.value))}
+                  className={clsx(
+                    'w-full pl-10 pr-4 py-2 rounded-lg border-2',
+                    'bg-white dark:bg-secondary-800',
+                    'border-secondary-200 dark:border-secondary-700',
+                    'text-secondary-900 dark:text-secondary-100',
+                    'focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20',
+                    'transition-colors'
+                  )}
+                >
+                  <option value={0}>{t('items.allCategories')}</option>
+                  {categories.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {isRTL ? cat.nameAr : cat.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
-            {/* Category Filter */}
-            <div className="relative">
-              <Filter size={20} className="absolute top-3 left-3 text-secondary-400" />
-              <select
-                value={selectedCategoryFilter}
-                onChange={(e) => setSelectedCategoryFilter(parseInt(e.target.value))}
-                className={clsx(
-                  'w-full pl-10 pr-4 py-2 rounded-lg border-2',
-                  'bg-white dark:bg-secondary-800',
-                  'border-secondary-200 dark:border-secondary-700',
-                  'text-secondary-900 dark:text-secondary-100',
-                  'focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20',
-                  'transition-colors'
-                )}
-              >
-                <option value={0}>{t('items.allCategories')}</option>
-                {categories.map((cat) => (
-                  <option key={cat.id} value={cat.id}>
-                    {isRTL ? cat.nameAr : cat.name}
-                  </option>
-                ))}
-              </select>
+            {/* Status Badge Toggle - Professional Design */}
+            <div className="flex items-center justify-between pt-1">
+              <span className="text-sm font-semibold text-secondary-700 dark:text-secondary-300">
+                {isRTL ? 'تصفية حسب الحالة' : 'Filter by Status'}
+              </span>
+              <div className="flex gap-2 bg-gradient-to-r from-secondary-50 to-secondary-100 dark:from-secondary-900 dark:to-secondary-800 p-1.5 rounded-xl border border-secondary-200 dark:border-secondary-700">
+                <button
+                  onClick={() => setAvailabilityFilter('available')}
+                  className={clsx(
+                    'px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300',
+                    'flex items-center gap-2 whitespace-nowrap',
+                    availabilityFilter === 'available'
+                      ? 'bg-success-500 text-white shadow-lg shadow-success-500/40 scale-105'
+                      : 'bg-transparent text-secondary-600 dark:text-secondary-400 hover:bg-white/50 dark:hover:bg-secondary-700/50'
+                  )}
+                >
+                  <CheckCircle2 size={18} className="flex-shrink-0" />
+                  <span>{isRTL ? 'متاح' : 'Available'}</span>
+                </button>
+                <button
+                  onClick={() => setAvailabilityFilter('all')}
+                  className={clsx(
+                    'px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300',
+                    'flex items-center gap-2 whitespace-nowrap',
+                    availabilityFilter === 'all'
+                      ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/40 scale-105'
+                      : 'bg-transparent text-secondary-600 dark:text-secondary-400 hover:bg-white/50 dark:hover:bg-secondary-700/50'
+                  )}
+                >
+                  <Layers size={18} className="flex-shrink-0" />
+                  <span>{isRTL ? 'الكل' : 'All'}</span>
+                </button>
+                <button
+                  onClick={() => setAvailabilityFilter('unavailable')}
+                  className={clsx(
+                    'px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300',
+                    'flex items-center gap-2 whitespace-nowrap',
+                    availabilityFilter === 'unavailable'
+                      ? 'bg-danger-500 text-white shadow-lg shadow-danger-500/40 scale-105'
+                      : 'bg-transparent text-secondary-600 dark:text-secondary-400 hover:bg-white/50 dark:hover:bg-secondary-700/50'
+                  )}
+                >
+                  <XCircle size={18} className="flex-shrink-0" />
+                  <span>{isRTL ? 'غير متاح' : 'Unavailable'}</span>
+                </button>
+              </div>
             </div>
           </div>
         </Card>

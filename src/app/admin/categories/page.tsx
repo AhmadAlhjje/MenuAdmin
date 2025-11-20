@@ -10,7 +10,7 @@ import { categoryService } from '@/api/services/categoryService';
 import { useNotification } from '@/hooks/useNotification';
 import { useAsync } from '@/hooks/useAsync';
 import { Category } from '@/types';
-import { Edit2, Trash2, Plus, Grid3x3, Layers, ArrowUpDown } from 'lucide-react';
+import { Edit2, Trash2, Plus, Grid3x3, Layers } from 'lucide-react';
 import clsx from 'clsx';
 
 export default function CategoriesPage() {
@@ -169,12 +169,6 @@ export default function CategoriesPage() {
                     <h3 className="text-lg font-bold text-secondary-900 dark:text-secondary-100 truncate">
                       {isRTL ? category.nameAr : category.name}
                     </h3>
-                    {category.displayOrder > 0 && (
-                      <div className="flex items-center gap-1 text-xs text-secondary-500 dark:text-secondary-400 mt-1">
-                        <ArrowUpDown size={12} />
-                        <span>{t('categories.order')}: {category.displayOrder}</span>
-                      </div>
-                    )}
                   </div>
                 </div>
 

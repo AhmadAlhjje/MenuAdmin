@@ -94,70 +94,7 @@ export default function SettingsPage() {
       <Header title={t('settings.title')} description={t('settings.account')} />
 
       <div className="p-6 md:p-8 max-w-6xl mx-auto">
-        {/* Theme Settings */}
-        <Card className="mb-8">
-          <div dir={isRTL ? 'rtl' : 'ltr'}>
-            <h2 className="text-xl font-semibold text-secondary-900 dark:text-secondary-100 mb-4">
-              {t('common.theme')}
-            </h2>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-secondary-600 dark:text-secondary-400">
-                  {isDark ? t('common.darkMode') : t('common.lightMode')}
-                </p>
-              </div>
-              <button
-                onClick={toggleTheme}
-                className={clsx(
-                  'relative w-14 h-8 rounded-full transition-colors',
-                  isDark ? 'bg-primary-600' : 'bg-secondary-300'
-                )}
-              >
-                <div
-                  className={clsx(
-                    'absolute top-1 w-6 h-6 rounded-full bg-white transition-all',
-                    isDark ? 'right-1' : 'left-1'
-                  )}
-                >
-                  {isDark ? (
-                    <Moon size={20} className="w-6 h-6 text-primary-600 p-1" />
-                  ) : (
-                    <Sun size={20} className="w-6 h-6 text-yellow-500 p-1" />
-                  )}
-                </div>
-              </button>
-            </div>
-          </div>
-        </Card>
 
-        {/* Language Settings */}
-        <Card className="mb-6">
-          <div dir={isRTL ? 'rtl' : 'ltr'}>
-            <h2 className="text-xl font-semibold text-secondary-900 dark:text-secondary-100 mb-4">
-              {t('common.language')}
-            </h2>
-            <div className="flex gap-3">
-              <Button
-                variant={i18n.language === 'en' ? 'primary' : 'secondary'}
-                onClick={() => {
-                  i18n.changeLanguage('en');
-                  localStorage.setItem('language', 'en');
-                }}
-              >
-                {t('common.english')}
-              </Button>
-              <Button
-                variant={i18n.language === 'ar' ? 'primary' : 'secondary'}
-                onClick={() => {
-                  i18n.changeLanguage('ar');
-                  localStorage.setItem('language', 'ar');
-                }}
-              >
-                {t('common.arabic')}
-              </Button>
-            </div>
-          </div>
-        </Card>
 
         {/* Password Settings */}
         <Card>
@@ -293,13 +230,6 @@ export default function SettingsPage() {
             </form>
           </div>
         </Card>
-
-        {/* Info Box */}
-        <div className="mt-8 p-4 bg-info-50 dark:bg-info-900/20 border border-info-200 dark:border-info-800 rounded-lg">
-          <p className="text-sm text-info-700 dark:text-info-400">
-            {t('settings.account')}
-          </p>
-        </div>
       </div>
     </>
   );
