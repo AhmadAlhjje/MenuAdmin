@@ -25,7 +25,7 @@ export const useNotificationStore = create<NotificationStore>((set) => ({
         set((state) => ({
           notifications: state.notifications.filter((n) => n.id !== id),
         }));
-      }, notification.duration || 3000);
+      }, notification.duration);
     }
   },
 

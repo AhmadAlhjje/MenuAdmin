@@ -12,7 +12,7 @@ import { Table } from '@/types';
 import { Edit2, Trash2, Plus, QrCode, Printer, Users, MapPin, CheckCircle2, XCircle } from 'lucide-react';
 import clsx from 'clsx';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function TablesPage() {
   const { t, i18n } = useTranslation();

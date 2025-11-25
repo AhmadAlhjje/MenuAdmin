@@ -28,7 +28,7 @@ import {
 } from 'lucide-react';
 import clsx from 'clsx';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 const MAX_IMAGES = 5;
 
 export default function ItemsPage() {
@@ -711,7 +711,7 @@ export default function ItemsPage() {
               />
 
               <Input
-                label={`${t('items.preparationTime')} (${t('common.min')})`}
+                label={`${t('items.preparationTime')}`}
                 type="number"
                 min="0"
                 value={formData.preparationTime?.toString() || '30'}
