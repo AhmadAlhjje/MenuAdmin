@@ -6,8 +6,9 @@ import { Header } from '@/components/organisms';
 import { Button, Card } from '@/components/atoms';
 import { useNotification } from '@/hooks/useNotification';
 import { useThemeStore } from '@/store/themeStore';
-import { Lock, Eye, EyeOff, Moon, Sun, Globe } from 'lucide-react';
-import clsx from 'clsx';
+import { authService } from '@/api/services/authService';
+import { Lock, Eye, EyeOff } from 'lucide-react';
+
 
 export default function SettingsPage() {
   const { t, i18n } = useTranslation();
@@ -60,8 +61,7 @@ export default function SettingsPage() {
 
     setIsLoadingPassword(true);
     try {
-      // TODO: Call API to change password
-      // await authService.changePassword(passwordForm.currentPassword, passwordForm.newPassword);
+      await authService.changePassword(passwordForm.currentPassword, passwordForm.newPassword);
 
       notify.success(t('settings.changePasswordSuccess'));
       setPasswordForm({
@@ -69,8 +69,8 @@ export default function SettingsPage() {
         newPassword: '',
         confirmPassword: '',
       });
-    } catch (error) {
-      notify.error(t('settings.changePasswordError'));
+    } catch (error: any) {
+      notify.error(error.response?.data?.message);
     } finally {
       setIsLoadingPassword(false);
     }

@@ -44,9 +44,11 @@ apiClient.interceptors.request.use(
 // Handle response errors
 apiClient.interceptors.response.use(
   (response) => response,
-  (error: AxiosError) => {
+  (error: AxiosError<any>) => {
+    // Only clear tokens and redirect on 401 status code
+    // Don't clear on other errors (like 400 with wrong password)
     if (error.response?.status === 401) {
-      // Clear tokens
+      // Clear tokens only on actual authentication errors
       if (typeof window !== 'undefined') {
         localStorage.removeItem('authToken');
         localStorage.removeItem('user');
