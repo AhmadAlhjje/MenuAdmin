@@ -194,21 +194,6 @@ export default function LoginPage() {
               )}
             </Button>
           </form>
-
-          {/* Demo Credentials */}
-          <div className="mt-6 pt-6 border-t border-secondary-200 dark:border-secondary-700">
-            <p className="text-xs text-secondary-600 dark:text-secondary-400 text-center mb-3">
-              {t('login.demoCredentials') || 'Demo Credentials'}
-            </p>
-            <div className="bg-secondary-50 dark:bg-secondary-700/50 rounded-lg p-3 space-y-2 text-xs text-secondary-700 dark:text-secondary-300">
-              <p>
-                <span className="font-semibold">{t('login.email') || 'Email'}:</span> admin@example.com
-              </p>
-              <p>
-                <span className="font-semibold">{t('login.password') || 'Password'}:</span> password123
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* Footer */}

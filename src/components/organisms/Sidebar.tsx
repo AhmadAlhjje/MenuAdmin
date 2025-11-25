@@ -15,6 +15,10 @@ import {
   Sun,
   ChevronLeft,
   ChevronRight,
+  Users,
+  TrendingUp,
+  BarChart3,
+  ChefHat,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useThemeStore } from '@/store/themeStore';
@@ -70,6 +74,18 @@ export const Sidebar: React.FC = () => {
       label: t('sidebar.tableManagement'),
       href: '/admin/tables',
       icon: Armchair,
+    },
+    {
+      label: isRTL ? 'المطابخ' : 'Kitchens',
+      href: '/admin/users',
+      icon: ChefHat,
+    },
+    {
+      label: isRTL ? 'التقارير' : 'Reports',
+      items: [
+        { label: isRTL ? 'الأصناف الأكثر طلباً' : 'Popular Items', href: '/admin/reports/popular-items', icon: TrendingUp },
+        { label: isRTL ? 'تقارير المبيعات' : 'Sales Report', href: '/admin/reports/sales', icon: BarChart3 },
+      ],
     },
     {
       label: t('common.settings'),

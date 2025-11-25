@@ -14,7 +14,8 @@
       "Bash(ss:*)",
       "Bash(pkill:*)",
       "Bash(npx pkill -f \"next dev\")",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
