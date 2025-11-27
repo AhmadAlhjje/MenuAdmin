@@ -1,12 +1,17 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CheckCircle, AlertCircle, Info, AlertTriangle, X } from 'lucide-react';
 import { useNotificationStore } from '@/store/notificationStore';
 import clsx from 'clsx';
 
 export const NotificationContainer: React.FC = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const { notifications, removeNotification } = useNotificationStore();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const iconMap = {
     success: <CheckCircle size={20} />,
@@ -28,6 +33,10 @@ export const NotificationContainer: React.FC = () => {
     warning: 'text-warning-600 dark:text-warning-400',
     info: 'text-info-600 dark:text-info-400',
   };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div className="fixed top-4 right-4 z-[1000] space-y-2 max-w-sm">

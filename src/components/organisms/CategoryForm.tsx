@@ -24,6 +24,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
     name: initialData?.name || '',
     nameAr: initialData?.nameAr || '',
     description: initialData?.description || '',
+    displayOrder: initialData?.displayOrder || 0,
   });
 
   const validate = () => {

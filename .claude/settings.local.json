@@ -15,7 +15,10 @@
       "Bash(pkill:*)",
       "Bash(npx pkill -f \"next dev\")",
       "Bash(find:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(for:*)",
+      "Bash(do if head -5 \"$file\")",
+      "Bash(then sed -i \"1s/^/export const dynamic = ''''force-dynamic'''';\\n\\n/\" \"$file\" fi done)"
     ],
     "deny": [],
     "ask": []
