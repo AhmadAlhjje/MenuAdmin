@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # تطبيق Next.js
   menuadmin:

@@ -20,7 +20,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # تثبيت جميع التبعيات (بما في ذلك devDependencies)
-RUN npm ci
+RUN npm install
 
 # نسخ باقي الملفات
 COPY . .
