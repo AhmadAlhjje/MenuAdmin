@@ -20,7 +20,8 @@
       "Bash(do if head -5 \"$file\")",
       "Bash(then sed -i \"1s/^/export const dynamic = ''''force-dynamic'''';\\n\\n/\" \"$file\" fi done)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nReplace all USD currency symbols with ل.س (Syrian Pound)\n\n- Updated formatPrice utility to use ل.س instead of currency formatting\n- Changed all price displays in dashboard and reports to ل.س format\n- Updated all sales and revenue displays to use ل.س currency symbol\n- Modified popular items report to show prices in ل.س\n- Added currency translations to i18n (ل.س and Syrian Pound)\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nReplace all USD currency symbols with ل.س (Syrian Pound)\n\n- Updated formatPrice utility to use ل.س instead of currency formatting\n- Changed all price displays in dashboard and reports to ل.س format\n- Updated all sales and revenue displays to use ل.س currency symbol\n- Modified popular items report to show prices in ل.س\n- Added currency translations to i18n (ل.س and Syrian Pound)\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

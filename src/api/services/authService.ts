@@ -7,6 +7,7 @@ export const authService = {
     const response = await apiClient.post<ApiResponse<AuthToken>>('/api/auth/login', {
       email,
       password,
+      requiredRole: 'admin',
     });
     return response.data;
   },
