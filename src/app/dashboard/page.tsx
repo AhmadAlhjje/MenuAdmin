@@ -103,7 +103,7 @@ export default function DashboardPage() {
                       {isRTL ? 'مبيعات اليوم' : "Today's Sales"}
                     </p>
                     <p className="text-3xl font-bold text-success-600 dark:text-success-400">
-                      ${parseFloat(stats.todaySales).toFixed(2)}
+                      L.S {parseFloat(stats.todaySales).toFixed(2)}
                     </p>
                   </div>
                   <div className="w-12 h-12 rounded-lg bg-success-100 dark:bg-success-900/20 flex items-center justify-center">
@@ -137,7 +137,7 @@ export default function DashboardPage() {
                       {isRTL ? 'متوسط الجلسة' : 'Avg Session'}
                     </p>
                     <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-                      ${parseFloat(stats.avgSessionValue || '0').toFixed(2)}
+                      L.S {parseFloat(stats.avgSessionValue || '0').toFixed(2)}
                     </p>
                   </div>
                   <div className="w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/20 flex items-center justify-center">

@@ -99,7 +99,7 @@ export default function PopularItemsPage() {
                   {isRTL ? 'إجمالي الإيرادات' : 'Total Revenue'}
                 </p>
                 <p className="text-3xl font-bold text-success-600 dark:text-success-400">
-                  ${popularItems.reduce((sum, item) => sum + parseFloat(item.totalRevenue), 0).toFixed(2)}
+                  L.S {popularItems.reduce((sum, item) => sum + parseFloat(item.totalRevenue), 0).toFixed(2)}
                 </p>
               </div>
               <div className="w-12 h-12 rounded-lg bg-success-100 dark:bg-success-900/20 flex items-center justify-center">
@@ -207,7 +207,7 @@ export default function PopularItemsPage() {
                             {isRTL ? item.item.category.nameAr : item.item.category.name}
                           </span>
                           <span className="text-sm text-secondary-600 dark:text-secondary-400">
-                            ${item.item.price} {isRTL ? 'للوحدة' : 'per item'}
+                            L.S {item.item.price} {isRTL ? 'للوحدة' : 'per item'}
                           </span>
                         </div>
                       </div>
@@ -231,7 +231,7 @@ export default function PopularItemsPage() {
                             <DollarSign size={20} className="text-success-600 dark:text-success-400" />
                           </div>
                           <p className="text-2xl font-bold text-success-600 dark:text-success-400">
-                            ${parseFloat(item.totalRevenue).toFixed(2)}
+                            L.S {parseFloat(item.totalRevenue).toFixed(2)}
                           </p>
                           <p className="text-xs text-secondary-600 dark:text-secondary-400">
                             {isRTL ? 'الإيرادات' : 'Revenue'}

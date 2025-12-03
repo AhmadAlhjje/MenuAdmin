@@ -32,7 +32,9 @@
     "ok": "موافق",
     "min": "دقيقة",
     "new": "جديد",
-    "uploading": "جاري الرفع..."
+    "uploading": "جاري الرفع...",
+    "currency": "ل.س",
+    "currencyName": "الليرة السورية"
   },
   "navigation": {
     "menu": "إدارة القائمة",

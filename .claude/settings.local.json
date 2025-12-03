@@ -18,7 +18,9 @@
       "Bash(cat:*)",
       "Bash(for:*)",
       "Bash(do if head -5 \"$file\")",
-      "Bash(then sed -i \"1s/^/export const dynamic = ''''force-dynamic'''';\\n\\n/\" \"$file\" fi done)"
+      "Bash(then sed -i \"1s/^/export const dynamic = ''''force-dynamic'''';\\n\\n/\" \"$file\" fi done)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nReplace all USD currency symbols with L.S (Syrian Pound)\n\n- Updated formatPrice utility to use L.S instead of currency formatting\n- Changed all price displays in dashboard and reports to L.S format\n- Updated all sales and revenue displays to use L.S currency symbol\n- Modified popular items report to show prices in L.S\n- Added currency translations to i18n (L.S and Syrian Pound)\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

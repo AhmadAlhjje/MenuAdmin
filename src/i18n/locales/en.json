@@ -32,7 +32,9 @@
     "ok": "OK",
     "min": "min",
     "new": "New",
-    "uploading": "Uploading..."
+    "uploading": "Uploading...",
+    "currency": "L.S",
+    "currencyName": "Syrian Pound"
   },
   "navigation": {
     "menu": "Menu Management",

@@ -1,8 +1,5 @@
-export const formatPrice = (price: number, currency: string = 'SAR'): string => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: currency,
-  }).format(price);
+export const formatPrice = (price: number): string => {
+  return `L.S ${price.toFixed(2)}`;
 };
 
 export const formatDate = (date: string | Date): string => {
