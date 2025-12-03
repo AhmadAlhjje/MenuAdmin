@@ -1,5 +1,5 @@
 export const formatPrice = (price: number): string => {
-  return `L.S ${price.toFixed(2)}`;
+  return `ل.س ${price.toFixed(2)}`;
 };
 
 export const formatDate = (date: string | Date): string => {
