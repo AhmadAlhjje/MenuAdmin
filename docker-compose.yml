@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # تطبيق Next.js
+  menuadmin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: menuadmin-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:3003}
+    env_file:
+      - .env.production
+    restart: unless-stopped
+    networks:
+      - menuadmin-network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  menuadmin-network:
+    driver: bridge
