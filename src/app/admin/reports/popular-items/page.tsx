@@ -57,9 +57,9 @@ export default function PopularItemsPage() {
         description={isRTL ? 'تقرير بالأصناف الأكثر مبيعاً وإيراداً' : 'Report of best-selling and highest revenue items'}
       />
 
-      <div className="p-8">
+      <div className="p-4 sm:p-6 lg:p-8">
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <Card>
             <div className="flex items-center justify-between">
               <div>
@@ -138,13 +138,13 @@ export default function PopularItemsPage() {
 
         {/* Popular Items List */}
         {status === 'success' && popularItems.length > 0 && (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-secondary-900 dark:text-secondary-100">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-secondary-900 dark:text-secondary-100">
                 {isRTL ? 'الأصناف الأكثر طلباً' : 'Top Performing Items'}
               </h2>
-              <div className="flex items-center gap-2 text-sm text-secondary-600 dark:text-secondary-400">
-                <TrendingUp size={18} />
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-secondary-600 dark:text-secondary-400">
+                <TrendingUp size={16} className="sm:w-[18px] sm:h-[18px]" />
                 <span>{isRTL ? 'مرتبة حسب عدد الطلبات' : 'Sorted by orders'}</span>
               </div>
             </div>
@@ -166,20 +166,20 @@ export default function PopularItemsPage() {
                     )}
                     dir={isRTL ? 'rtl' : 'ltr'}
                   >
-                    <div className="flex items-center gap-6">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
                       {/* Rank Badge */}
                       <div className="flex-shrink-0">
                         {topBadge ? (
                           <div className={clsx(
-                            'w-16 h-16 rounded-xl flex flex-col items-center justify-center text-white font-bold',
+                            'w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex flex-col items-center justify-center text-white font-bold',
                             topBadge.bg
                           )}>
-                            <span className="text-2xl">{topBadge.icon}</span>
+                            <span className="text-xl sm:text-2xl">{topBadge.icon}</span>
                             <span className="text-xs mt-1">{topBadge.text}</span>
                           </div>
                         ) : (
-                          <div className="w-16 h-16 rounded-xl bg-secondary-100 dark:bg-secondary-800 flex items-center justify-center">
-                            <span className="text-2xl font-bold text-secondary-600 dark:text-secondary-400">
+                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-secondary-100 dark:bg-secondary-800 flex items-center justify-center">
+                            <span className="text-xl sm:text-2xl font-bold text-secondary-600 dark:text-secondary-400">
                               #{index + 1}
                             </span>
                           </div>
@@ -192,61 +192,61 @@ export default function PopularItemsPage() {
                           <img
                             src={`${BASE_URL}${images[0]}`}
                             alt={item.item.name}
-                            className="w-24 h-24 object-cover rounded-lg border-2 border-secondary-200 dark:border-secondary-700"
+                            className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg border-2 border-secondary-200 dark:border-secondary-700"
                           />
                         </div>
                       )}
 
                       {/* Item Info */}
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-xl font-bold text-secondary-900 dark:text-secondary-100 mb-1">
+                        <h3 className="text-lg sm:text-xl font-bold text-secondary-900 dark:text-secondary-100 mb-1">
                           {isRTL ? item.item.nameAr : item.item.name}
                         </h3>
-                        <div className="flex items-center gap-2 mb-2">
+                        <div className="flex flex-wrap items-center gap-2 mb-2">
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400">
                             {isRTL ? item.item.category.nameAr : item.item.category.name}
                           </span>
-                          <span className="text-sm text-secondary-600 dark:text-secondary-400">
+                          <span className="text-xs sm:text-sm text-secondary-600 dark:text-secondary-400">
                             ل.س {item.item.price} {isRTL ? 'للوحدة' : 'per item'}
                           </span>
                         </div>
                       </div>
 
                       {/* Stats */}
-                      <div className="flex-shrink-0 grid grid-cols-3 gap-6">
+                      <div className="w-full sm:w-auto grid grid-cols-3 gap-3 sm:gap-6">
                         <div className="text-center">
-                          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-info-100 dark:bg-info-900/20 mx-auto mb-2">
-                            <ShoppingCart size={20} className="text-info-600 dark:text-info-400" />
+                          <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-info-100 dark:bg-info-900/20 mx-auto mb-1 sm:mb-2">
+                            <ShoppingCart size={18} className="sm:w-5 sm:h-5 text-info-600 dark:text-info-400" />
                           </div>
-                          <p className="text-2xl font-bold text-secondary-900 dark:text-secondary-100">
+                          <p className="text-lg sm:text-2xl font-bold text-secondary-900 dark:text-secondary-100">
                             {item.totalOrdered}
                           </p>
-                          <p className="text-xs text-secondary-600 dark:text-secondary-400">
-                            {isRTL ? 'الكمية المباعة' : 'Units Sold'}
+                          <p className="text-xs text-secondary-600 dark:text-secondary-400 mt-0.5">
+                            {isRTL ? 'مباعة' : 'Sold'}
                           </p>
                         </div>
 
                         <div className="text-center">
-                          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-success-100 dark:bg-success-900/20 mx-auto mb-2">
-                            <DollarSign size={20} className="text-success-600 dark:text-success-400" />
+                          <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-success-100 dark:bg-success-900/20 mx-auto mb-1 sm:mb-2">
+                            <DollarSign size={18} className="sm:w-5 sm:h-5 text-success-600 dark:text-success-400" />
                           </div>
-                          <p className="text-2xl font-bold text-success-600 dark:text-success-400">
-                            ل.س {parseFloat(item.totalRevenue).toFixed(2)}
+                          <p className="text-sm sm:text-xl font-bold text-success-600 dark:text-success-400">
+                            {parseFloat(item.totalRevenue).toFixed(0)}
                           </p>
-                          <p className="text-xs text-secondary-600 dark:text-secondary-400">
-                            {isRTL ? 'الإيرادات' : 'Revenue'}
+                          <p className="text-xs text-secondary-600 dark:text-secondary-400 mt-0.5">
+                            {isRTL ? 'إيرادات' : 'Revenue'}
                           </p>
                         </div>
 
                         <div className="text-center">
-                          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-warning-100 dark:bg-warning-900/20 mx-auto mb-2">
-                            <Award size={20} className="text-warning-600 dark:text-warning-400" />
+                          <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-warning-100 dark:bg-warning-900/20 mx-auto mb-1 sm:mb-2">
+                            <Award size={18} className="sm:w-5 sm:h-5 text-warning-600 dark:text-warning-400" />
                           </div>
-                          <p className="text-2xl font-bold text-secondary-900 dark:text-secondary-100">
+                          <p className="text-lg sm:text-2xl font-bold text-secondary-900 dark:text-secondary-100">
                             {item.ordersCount}
                           </p>
-                          <p className="text-xs text-secondary-600 dark:text-secondary-400">
-                            {isRTL ? 'الطلبات' : 'Orders'}
+                          <p className="text-xs text-secondary-600 dark:text-secondary-400 mt-0.5">
+                            {isRTL ? 'طلبات' : 'Orders'}
                           </p>
                         </div>
                       </div>

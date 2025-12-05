@@ -16,13 +16,14 @@ export const Header: React.FC<HeaderProps> = ({ title, description }) => {
   return (
     <div
       className={clsx(
-        'bg-white dark:bg-secondary-800 border-b border-secondary-200 dark:border-secondary-700 p-6'
+        'bg-white dark:bg-secondary-800 border-b border-secondary-200 dark:border-secondary-700',
+        'p-4 sm:p-6 lg:p-8'
       )}
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      <h1 className="text-3xl font-bold text-secondary-900 dark:text-secondary-100">{title}</h1>
+      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-secondary-900 dark:text-secondary-100">{title}</h1>
       {description && (
-        <p className="mt-2 text-secondary-600 dark:text-secondary-400">{description}</p>
+        <p className="mt-2 text-sm sm:text-base text-secondary-600 dark:text-secondary-400">{description}</p>
       )}
     </div>
   );

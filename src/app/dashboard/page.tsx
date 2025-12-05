@@ -64,7 +64,7 @@ export default function DashboardPage() {
         title={t('common.dashboard')}
         description={isRTL ? 'مرحباً بك في لوحة تحكم المطعم' : 'Welcome to your restaurant admin dashboard'}
       />
-      <div className="p-8">
+      <div className="p-4 sm:p-6 lg:p-8">
         {/* Stats Overview */}
         {status === 'loading' && (
           <Card className="mb-8">

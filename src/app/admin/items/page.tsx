@@ -344,48 +344,48 @@ export default function ItemsPage() {
             </div>
 
             {/* Status Badge Toggle - Professional Design */}
-            <div className="flex items-center justify-between pt-1">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-1">
               <span className="text-sm font-semibold text-secondary-700 dark:text-secondary-300">
                 {isRTL ? 'تصفية حسب الحالة' : 'Filter by Status'}
               </span>
-              <div className="flex gap-2 bg-gradient-to-r from-secondary-50 to-secondary-100 dark:from-secondary-900 dark:to-secondary-800 p-1.5 rounded-xl border border-secondary-200 dark:border-secondary-700">
+              <div className="flex flex-wrap gap-2 bg-gradient-to-r from-secondary-50 to-secondary-100 dark:from-secondary-900 dark:to-secondary-800 p-1.5 rounded-xl border border-secondary-200 dark:border-secondary-700 w-full sm:w-auto">
                 <button
                   onClick={() => setAvailabilityFilter('available')}
                   className={clsx(
-                    'px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300',
-                    'flex items-center gap-2 whitespace-nowrap',
+                    'px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300',
+                    'flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap flex-1 sm:flex-initial',
                     availabilityFilter === 'available'
                       ? 'bg-success-500 text-white shadow-lg shadow-success-500/40 scale-105'
                       : 'bg-transparent text-secondary-600 dark:text-secondary-400 hover:bg-white/50 dark:hover:bg-secondary-700/50'
                   )}
                 >
-                  <CheckCircle2 size={18} className="flex-shrink-0" />
+                  <CheckCircle2 size={16} className="sm:w-[18px] sm:h-[18px] flex-shrink-0" />
                   <span>{isRTL ? 'متاح' : 'Available'}</span>
                 </button>
                 <button
                   onClick={() => setAvailabilityFilter('all')}
                   className={clsx(
-                    'px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300',
-                    'flex items-center gap-2 whitespace-nowrap',
+                    'px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300',
+                    'flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap flex-1 sm:flex-initial',
                     availabilityFilter === 'all'
                       ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/40 scale-105'
                       : 'bg-transparent text-secondary-600 dark:text-secondary-400 hover:bg-white/50 dark:hover:bg-secondary-700/50'
                   )}
                 >
-                  <Layers size={18} className="flex-shrink-0" />
+                  <Layers size={16} className="sm:w-[18px] sm:h-[18px] flex-shrink-0" />
                   <span>{isRTL ? 'الكل' : 'All'}</span>
                 </button>
                 <button
                   onClick={() => setAvailabilityFilter('unavailable')}
                   className={clsx(
-                    'px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300',
-                    'flex items-center gap-2 whitespace-nowrap',
+                    'px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300',
+                    'flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap flex-1 sm:flex-initial',
                     availabilityFilter === 'unavailable'
                       ? 'bg-danger-500 text-white shadow-lg shadow-danger-500/40 scale-105'
                       : 'bg-transparent text-secondary-600 dark:text-secondary-400 hover:bg-white/50 dark:hover:bg-secondary-700/50'
                   )}
                 >
-                  <XCircle size={18} className="flex-shrink-0" />
+                  <XCircle size={16} className="sm:w-[18px] sm:h-[18px] flex-shrink-0" />
                   <span>{isRTL ? 'غير متاح' : 'Unavailable'}</span>
                 </button>
               </div>

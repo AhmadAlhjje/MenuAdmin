@@ -24,12 +24,13 @@ export const Input = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, In
         <Tag
           ref={ref}
           className={clsx(
-            'px-4 py-2 rounded-lg border-2 transition-colors duration-200',
+            'px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg border-2 transition-colors duration-200',
             'bg-white dark:bg-secondary-800',
-            'text-secondary-900 dark:text-secondary-100',
+            'text-sm sm:text-base text-secondary-900 dark:text-secondary-100',
             'placeholder-secondary-400 dark:placeholder-secondary-500',
             'border-secondary-200 dark:border-secondary-700',
             'focus:outline-none focus:border-primary-500 dark:focus:border-primary-400',
+            'w-full',
             error && 'border-danger-500 focus:border-danger-500',
             className
           )}

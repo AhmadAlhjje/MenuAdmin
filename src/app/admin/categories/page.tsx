@@ -100,21 +100,21 @@ export default function CategoriesPage() {
     <>
       <Header title={t('categories.title')} description={t('categories.list')} />
 
-      <div className="p-8">
+      <div className="p-4 sm:p-6 lg:p-8">
         {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex justify-between items-center">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h2 className="text-2xl font-bold text-secondary-900 dark:text-secondary-100">
+              <h2 className="text-xl sm:text-2xl font-bold text-secondary-900 dark:text-secondary-100">
                 {t('categories.list')}
               </h2>
               <p className="text-sm text-secondary-600 dark:text-secondary-400 mt-1">
                 {categories.length} {categories.length === 1 ? t('categories.category') : t('categories.categories')}
               </p>
             </div>
-            <Button onClick={() => handleOpenModal()} className="flex items-center gap-2">
+            <Button onClick={() => handleOpenModal()} className="flex items-center gap-2 w-full sm:w-auto">
               <Plus size={20} />
-              {t('categories.add')}
+              <span className="sm:inline">{t('categories.add')}</span>
             </Button>
           </div>
         </div>
