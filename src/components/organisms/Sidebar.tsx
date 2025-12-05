@@ -136,7 +136,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
                         <Link
                           key={item.href}
                           href={item.href}
-                          onClick={onClose}
                           className={clsx(
                             'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors',
                             isActive(item.href)
@@ -154,7 +153,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
               ) : (
                 <Link
                   href={route.href || '#'}
-                  onClick={onClose}
                   className={clsx(
                     'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors',
                     isActive(route.href || '')

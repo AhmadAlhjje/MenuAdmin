@@ -39,10 +39,10 @@ export const RootLayoutClient: React.FC<RootLayoutClientProps> = ({ children }) 
     }
   }, []);
 
-  // Close sidebar on route change
-  useEffect(() => {
-    setSidebarOpen(false);
-  }, [pathname]);
+  // Don't close sidebar on route change - let user control it
+  // useEffect(() => {
+  //   setSidebarOpen(false);
+  // }, [pathname]);
 
   if (!mounted) {
     return null;
