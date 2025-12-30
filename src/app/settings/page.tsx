@@ -43,7 +43,7 @@ export default function SettingsPage() {
     true
   );
 
-  const restaurant = userData?.user?.restaurant;
+  const restaurant = (userData?.data as any)?.restaurant;
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
