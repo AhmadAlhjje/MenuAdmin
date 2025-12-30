@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Header } from '@/components/organisms';
 import { Button, Card, Input } from '@/components/atoms';
@@ -13,6 +13,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { Table } from '@/types';
 import { Edit2, Trash2, Plus, QrCode, Printer, Users, MapPin, CheckCircle2, XCircle } from 'lucide-react';
 import clsx from 'clsx';
+import { authService } from '@/api/services/authService';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -26,11 +27,35 @@ export default function TablesPage() {
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
   const [formData, setFormData] = useState<Partial<Table>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [restaurantInfo, setRestaurantInfo] = useState<{
+    name: string;
+    logo: string;
+  } | null>(null);
 
   const { data: tablesData, status, execute: refetchTables } = useAsync(
     () => tableService.getAllTables(100),
     true
   );
+
+  // Fetch restaurant info from /api/auth/me
+  useEffect(() => {
+    const fetchRestaurantInfo = async () => {
+      try {
+        const response = await authService.getCurrentUser();
+        // The API returns user data in response.data with restaurant info
+        const userData = response.data as any;
+        if (userData?.restaurant) {
+          setRestaurantInfo({
+            name: userData.restaurant.name,
+            logo: userData.restaurant.logoUrl || userData.restaurant.logo,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to fetch restaurant info:', error);
+      }
+    };
+    fetchRestaurantInfo();
+  }, []);
 
   const handleOpenModal = (table?: Table) => {
     if (table) {
@@ -92,6 +117,8 @@ export default function TablesPage() {
 
   const handlePrintQR = (table: Table) => {
     const qrImageUrl = `${BASE_URL}${table.qrCodeImage}`;
+    const logoUrl = restaurantInfo?.logo ? `${BASE_URL}${restaurantInfo.logo}` : '';
+    const restaurantName = restaurantInfo?.name || '';
 
     // Create print window
     const printWindow = window.open('', '_blank');
@@ -102,7 +129,7 @@ export default function TablesPage() {
 
     printWindow.document.write(`
       <!DOCTYPE html>
-      <html>
+      <html dir="${isRTL ? 'rtl' : 'ltr'}">
         <head>
           <title>QR Code - ${table.tableNumber}</title>
           <style>
@@ -126,6 +153,26 @@ export default function TablesPage() {
               text-align: center;
               max-width: 400px;
             }
+            .restaurant-header {
+              margin-bottom: 30px;
+              padding-bottom: 20px;
+              border-bottom: 2px solid #e2e8f0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 20px;
+            }
+            .restaurant-logo {
+              max-width: 80px;
+              max-height: 80px;
+              object-fit: contain;
+            }
+            .restaurant-name {
+              font-size: 28px;
+              font-weight: bold;
+              color: #1a202c;
+              margin: 0;
+            }
             h1 {
               font-size: 32px;
               margin-bottom: 10px;
@@ -136,7 +183,7 @@ export default function TablesPage() {
               color: #4a5568;
               margin-bottom: 30px;
             }
-            img {
+            .qr-image {
               max-width: 300px;
               height: auto;
               border: 2px solid #e2e8f0;
@@ -159,22 +206,28 @@ export default function TablesPage() {
         </head>
         <body>
           <div class="container">
-            <h1>Table ${table.tableNumber}</h1>
+            ${logoUrl || restaurantName ? `
+              <div class="restaurant-header">
+                ${logoUrl ? `<img src="${logoUrl}" alt="Restaurant Logo" class="restaurant-logo" />` : ''}
+                ${restaurantName ? `<div class="restaurant-name">${restaurantName}</div>` : ''}
+              </div>
+            ` : ''}
+            <h1>${isRTL ? 'طاولة' : 'Table'} ${table.tableNumber}</h1>
             <div class="info">
-              <p>Capacity: ${table.capacity} guests</p>
-              <p>Location: ${table.location}</p>
+              <p>${isRTL ? 'السعة' : 'Capacity'}: ${table.capacity} ${isRTL ? 'شخص' : 'guests'}</p>
+              <p>${isRTL ? 'الموقع' : 'Location'}: ${table.location}</p>
             </div>
-            <img src="${qrImageUrl}" alt="QR Code for Table ${table.tableNumber}" />
+            <img src="${qrImageUrl}" alt="QR Code for Table ${table.tableNumber}" class="qr-image" />
             <p class="qr-code-text">${table.qrCode}</p>
             <div class="footer">
-              <p>Scan to view menu and place orders</p>
+              <p>${isRTL ? 'امسح الرمز لعرض القائمة وتقديم الطلبات' : 'Scan to view menu and place orders'}</p>
             </div>
           </div>
           <script>
             window.onload = function() {
               setTimeout(function() {
                 window.print();
-              }, 500);
+              }, 1000);
             }
           </script>
         </body>
