@@ -9,7 +9,6 @@ import { Card, Button } from '@/components/atoms';
 import { reportService, SalesData } from '@/api/services/reportService';
 import { useAsync } from '@/hooks/useAsync';
 import {
-  DollarSign,
   TrendingUp,
   Calendar,
   Users,
@@ -80,11 +79,11 @@ export default function SalesReportPage() {
                   {isRTL ? 'إجمالي المبيعات' : 'Total Sales'}
                 </p>
                 <p className="text-3xl font-bold text-success-600 dark:text-success-400">
-                  ل.س {parseFloat(totals.totalSales || '0').toFixed(2)}
+                  ل.س {parseFloat(totals.totalSales || '0').toFixed(0)}
                 </p>
               </div>
               <div className="w-12 h-12 rounded-lg bg-success-100 dark:bg-success-900/20 flex items-center justify-center">
-                <DollarSign size={24} className="text-success-600 dark:text-success-400" />
+                <span className="text-2xl font-bold text-success-600 dark:text-success-400">ل.س</span>
               </div>
             </div>
           </Card>
@@ -112,7 +111,7 @@ export default function SalesReportPage() {
                   {isRTL ? 'متوسط قيمة الجلسة' : 'Avg Session Value'}
                 </p>
                 <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-                  ل.س {isNaN(parseFloat(totals.avgSessionValue)) ? '0.00' : parseFloat(totals.avgSessionValue).toFixed(2)}
+                  ل.س {isNaN(parseFloat(totals.avgSessionValue)) ? '0.00' : parseFloat(totals.avgSessionValue).toFixed(0)}
                 </p>
               </div>
               <div className="w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/20 flex items-center justify-center">
@@ -242,7 +241,7 @@ export default function SalesReportPage() {
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
                             <span className="text-lg font-bold text-success-600 dark:text-success-400">
-                              ل.س {parseFloat(data.totalSales).toFixed(2)}
+                              ل.س {parseFloat(data.totalSales).toFixed(0)}
                             </span>
                             {index > 0 && getGrowthIndicator(
                               parseFloat(data.totalSales),
@@ -265,7 +264,7 @@ export default function SalesReportPage() {
                         </td>
                         <td className="px-6 py-4">
                           <span className="font-semibold text-primary-600 dark:text-primary-400">
-                            ل.س {avgPerSession.toFixed(2)}
+                            ل.س {avgPerSession.toFixed(0)}
                           </span>
                         </td>
                       </tr>
@@ -279,7 +278,7 @@ export default function SalesReportPage() {
                     </td>
                     <td className="px-6 py-4">
                       <span className="text-lg font-bold text-success-600 dark:text-success-400">
-                        ل.س {parseFloat(totals.totalSales).toFixed(2)}
+                        ل.س {parseFloat(totals.totalSales).toFixed(0)}
                       </span>
                     </td>
                     <td className="px-6 py-4">
@@ -294,7 +293,7 @@ export default function SalesReportPage() {
                     </td>
                     <td className="px-6 py-4">
                       <span className="font-bold text-primary-600 dark:text-primary-400">
-                        ل.س {isNaN(parseFloat(totals.avgSessionValue)) ? '0.00' : parseFloat(totals.avgSessionValue).toFixed(2)}
+                        ل.س {isNaN(parseFloat(totals.avgSessionValue)) ? '0.00' : parseFloat(totals.avgSessionValue).toFixed(0)}
                       </span>
                     </td>
                   </tr>

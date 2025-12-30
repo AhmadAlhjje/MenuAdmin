@@ -21,8 +21,6 @@ import {
   Upload,
   Image as ImageIcon,
   Clock,
-  DollarSign,
-  Tag,
   CheckCircle2,
   XCircle,
   Filter,
@@ -510,9 +508,8 @@ export default function ItemsPage() {
                     {/* Info Grid */}
                     <div className="grid grid-cols-2 gap-2 mb-4">
                       <div className="flex items-center gap-1 text-sm text-secondary-600 dark:text-secondary-400">
-                        <DollarSign size={16} className="text-success-600" />
                         <span className="font-semibold text-secondary-900 dark:text-secondary-100">
-                          {item.price}
+                          {item.price} ل.س
                         </span>
                       </div>
                       <div className="flex items-center gap-1 text-sm text-secondary-600 dark:text-secondary-400">

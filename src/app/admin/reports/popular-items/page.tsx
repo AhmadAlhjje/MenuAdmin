@@ -11,7 +11,6 @@ import { useAsync } from '@/hooks/useAsync';
 import {
   TrendingUp,
   Package,
-  DollarSign,
   ShoppingCart,
   Award,
   BarChart3,
@@ -99,11 +98,8 @@ export default function PopularItemsPage() {
                   {isRTL ? 'إجمالي الإيرادات' : 'Total Revenue'}
                 </p>
                 <p className="text-3xl font-bold text-success-600 dark:text-success-400">
-                  ل.س {popularItems.reduce((sum, item) => sum + parseFloat(item.totalRevenue), 0).toFixed(2)}
+                  ل.س {popularItems.reduce((sum, item) => sum + parseFloat(item.totalRevenue), 0).toFixed(0)}
                 </p>
-              </div>
-              <div className="w-12 h-12 rounded-lg bg-success-100 dark:bg-success-900/20 flex items-center justify-center">
-                <DollarSign size={24} className="text-success-600 dark:text-success-400" />
               </div>
             </div>
           </Card>
@@ -228,7 +224,7 @@ export default function PopularItemsPage() {
 
                         <div className="text-center">
                           <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-success-100 dark:bg-success-900/20 mx-auto mb-1 sm:mb-2">
-                            <DollarSign size={18} className="sm:w-5 sm:h-5 text-success-600 dark:text-success-400" />
+                            <span className="text-lg sm:text-xl font-bold text-success-600 dark:text-success-400">ل.س</span>
                           </div>
                           <p className="text-sm sm:text-xl font-bold text-success-600 dark:text-success-400">
                             {parseFloat(item.totalRevenue).toFixed(0)}
