@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
@@ -16,6 +16,7 @@ import {
   BarChart3,
   ChefHat,
   X,
+  Loader2,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useThemeStore } from '@/store/themeStore';
@@ -36,6 +37,21 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
   const isRTL = i18n.language === 'ar';
   const { isDark, toggleTheme } = useThemeStore();
   const { notify } = useNotification();
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [targetPath, setTargetPath] = useState<string | null>(null);
+
+  // Reset navigation state when pathname changes
+  useEffect(() => {
+    setIsNavigating(false);
+    setTargetPath(null);
+  }, [pathname]);
+
+  const handleNavigation = (href: string, e: React.MouseEvent) => {
+    if (pathname !== href) {
+      setIsNavigating(true);
+      setTargetPath(href);
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -132,18 +148,25 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
                   <div className="space-y-1">
                     {hasItems && route.items?.map((item) => {
                       const ItemIcon = item.icon;
+                      const isLoadingThis = isNavigating && targetPath === item.href;
                       return (
                         <Link
                           key={item.href}
                           href={item.href}
+                          onClick={(e) => handleNavigation(item.href, e)}
                           className={clsx(
                             'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors',
                             isActive(item.href)
                               ? 'bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 font-medium'
-                              : 'text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-700'
+                              : 'text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-700',
+                            isLoadingThis && 'opacity-70 pointer-events-none'
                           )}
                         >
-                          <ItemIcon size={20} className="flex-shrink-0" />
+                          {isLoadingThis ? (
+                            <Loader2 size={20} className="flex-shrink-0 animate-spin" />
+                          ) : (
+                            <ItemIcon size={20} className="flex-shrink-0" />
+                          )}
                           <span className="text-sm">{item.label}</span>
                         </Link>
                       );
@@ -151,18 +174,29 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
                   </div>
                 </>
               ) : (
-                <Link
-                  href={route.href || '#'}
-                  className={clsx(
-                    'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors',
-                    isActive(route.href || '')
-                      ? 'bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 font-medium'
-                      : 'text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-700'
-                  )}
-                >
-                  {Icon && <Icon size={20} className="flex-shrink-0" />}
-                  <span className="text-sm">{route.label}</span>
-                </Link>
+                (() => {
+                  const isLoadingThis = isNavigating && targetPath === route.href;
+                  return (
+                    <Link
+                      href={route.href || '#'}
+                      onClick={(e) => handleNavigation(route.href || '#', e)}
+                      className={clsx(
+                        'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors',
+                        isActive(route.href || '')
+                          ? 'bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 font-medium'
+                          : 'text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-700',
+                        isLoadingThis && 'opacity-70 pointer-events-none'
+                      )}
+                    >
+                      {isLoadingThis ? (
+                        <Loader2 size={20} className="flex-shrink-0 animate-spin" />
+                      ) : (
+                        Icon && <Icon size={20} className="flex-shrink-0" />
+                      )}
+                      <span className="text-sm">{route.label}</span>
+                    </Link>
+                  );
+                })()
               )}
             </div>
           );
@@ -215,6 +249,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
 
   return (
     <>
+      {/* Loading Bar */}
+      {isNavigating && (
+        <div className="fixed top-0 left-0 right-0 z-[100]">
+          <div className="h-1 bg-primary-500 animate-pulse shadow-lg shadow-primary-500/50">
+            <div className="h-full bg-gradient-to-r from-transparent via-white to-transparent animate-shimmer"></div>
+          </div>
+        </div>
+      )}
+
       {/* Overlay - Only on mobile */}
       {isOpen && (
         <div
