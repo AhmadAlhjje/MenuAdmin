@@ -132,102 +132,354 @@ export default function TablesPage() {
       <html dir="${isRTL ? 'rtl' : 'ltr'}">
         <head>
           <title>QR Code - ${table.tableNumber}</title>
+          <meta charset="UTF-8">
           <style>
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+            }
+
             @media print {
               @page {
                 size: A4;
-                margin: 20mm;
+                margin: 0;
+              }
+              body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
               }
             }
+
             body {
-              font-family: Arial, sans-serif;
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              background: white;
+              color: #000;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              min-height: 100vh;
+              padding: 0;
+            }
+
+            .print-container {
+              width: 210mm;
+              height: 297mm;
+              background: white;
+              position: relative;
+              overflow: hidden;
+            }
+
+            /* Decorative Border Frame */
+            .decorative-border {
+              position: absolute;
+              top: 15mm;
+              left: 15mm;
+              right: 15mm;
+              bottom: 15mm;
+              border: 3px solid #000;
+              border-radius: 8px;
+            }
+
+            .inner-border {
+              position: absolute;
+              top: 18mm;
+              left: 18mm;
+              right: 18mm;
+              bottom: 18mm;
+              border: 1px solid #000;
+              border-radius: 6px;
+            }
+
+            /* Corner Decorations */
+            .corner-decoration {
+              position: absolute;
+              width: 20mm;
+              height: 20mm;
+              border: 2px solid #000;
+            }
+
+            .corner-top-left {
+              top: 20mm;
+              ${isRTL ? 'right' : 'left'}: 20mm;
+              border-right: none;
+              border-bottom: none;
+              ${isRTL ? 'border-left: none;' : 'border-right: none;'}
+            }
+
+            .corner-top-right {
+              top: 20mm;
+              ${isRTL ? 'left' : 'right'}: 20mm;
+              border-left: none;
+              border-bottom: none;
+              ${isRTL ? 'border-right: none;' : 'border-left: none;'}
+            }
+
+            .corner-bottom-left {
+              bottom: 20mm;
+              ${isRTL ? 'right' : 'left'}: 20mm;
+              border-right: none;
+              border-top: none;
+              ${isRTL ? 'border-left: none;' : 'border-right: none;'}
+            }
+
+            .corner-bottom-right {
+              bottom: 20mm;
+              ${isRTL ? 'left' : 'right'}: 20mm;
+              border-left: none;
+              border-top: none;
+              ${isRTL ? 'border-right: none;' : 'border-left: none;'}
+            }
+
+            /* Content Area */
+            .content {
+              position: absolute;
+              top: 25mm;
+              left: 25mm;
+              right: 25mm;
+              bottom: 25mm;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: space-between;
+              text-align: center;
+            }
+
+            /* Restaurant Header */
+            .restaurant-header {
+              width: 100%;
+              padding-bottom: 8mm;
+              border-bottom: 2px solid #000;
+              margin-bottom: 8mm;
+            }
+
+            .restaurant-logo {
+              max-width: 40mm;
+              max-height: 40mm;
+              object-fit: contain;
+            }
+
+            .restaurant-info {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: ${isRTL ? 'right' : 'left'};
+            }
+
+            .restaurant-name {
+              font-size: 24pt;
+              font-weight: 700;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+              color: #000;
+            }
+
+            .restaurant-tagline {
+              font-size: 10pt;
+              margin-top: 2mm;
+              font-style: italic;
+              color: #333;
+            }
+
+            /* Table Section */
+            .table-section {
+              flex: 1;
               display: flex;
               flex-direction: column;
               align-items: center;
               justify-content: center;
-              min-height: 100vh;
-              margin: 0;
-              padding: 20px;
+              width: 100%;
             }
-            .container {
-              text-align: center;
-              max-width: 400px;
+
+            .table-number-label {
+              font-size: 14pt;
+              font-weight: 300;
+              letter-spacing: 3px;
+              text-transform: uppercase;
+              margin-bottom: 2mm;
             }
-            .restaurant-header {
-              margin-bottom: 30px;
-              padding-bottom: 20px;
-              border-bottom: 2px solid #e2e8f0;
+
+            .table-number {
+              font-size: 64pt;
+              font-weight: 700;
+              margin-bottom: 6mm;
+              border: 4px solid #000;
+              padding: 8mm 20mm;
+              border-radius: 12px;
+              color: #000;
+              letter-spacing: 2px;
+            }
+
+            .table-details {
+              display: flex;
+              gap: 8mm;
+              margin-bottom: 8mm;
+              font-size: 11pt;
+            }
+
+            .detail-item {
               display: flex;
               align-items: center;
-              justify-content: center;
-              gap: 20px;
+              gap: 2mm;
+              padding: 2mm 4mm;
+              border: 1px solid #000;
+              border-radius: 4px;
             }
-            .restaurant-logo {
-              max-width: 80px;
-              max-height: 80px;
-              object-fit: contain;
+
+            .detail-icon {
+              font-weight: 700;
             }
-            .restaurant-name {
-              font-size: 28px;
-              font-weight: bold;
-              color: #1a202c;
-              margin: 0;
+
+            /* QR Code Section */
+            .qr-section {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
             }
-            h1 {
-              font-size: 32px;
-              margin-bottom: 10px;
-              color: #1a202c;
-            }
-            .info {
-              font-size: 18px;
-              color: #4a5568;
-              margin-bottom: 30px;
-            }
-            .qr-image {
-              max-width: 300px;
-              height: auto;
-              border: 2px solid #e2e8f0;
-              padding: 20px;
-              border-radius: 8px;
+
+            .qr-container {
               background: white;
+              padding: 8mm;
+              border: 3px solid #000;
+              border-radius: 8px;
+              margin-bottom: 4mm;
+              box-shadow: inset 0 0 0 1px #000;
             }
-            .footer {
-              margin-top: 30px;
-              font-size: 14px;
-              color: #718096;
+
+            .qr-image {
+              width: 60mm;
+              height: 60mm;
+              display: block;
             }
+
+            .qr-instruction {
+              font-size: 12pt;
+              font-weight: 600;
+              margin-bottom: 2mm;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+            }
+
             .qr-code-text {
-              font-size: 12px;
-              color: #a0aec0;
-              margin-top: 10px;
-              font-family: monospace;
+              font-family: 'Courier New', monospace;
+              font-size: 8pt;
+              color: #666;
+              letter-spacing: 1px;
+            }
+
+            /* Footer */
+            .footer {
+              width: 100%;
+              padding-top: 6mm;
+              border-top: 2px solid #000;
+              text-align: center;
+            }
+
+            .footer-text {
+              font-size: 9pt;
+              font-style: italic;
+            }
+
+            .divider-line {
+              height: 2px;
+              background: #000;
+              width: 60mm;
+              margin: 4mm auto;
+            }
+
+            /* Pattern Background */
+            .pattern-bg {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              opacity: 0.03;
+              background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10mm, #000 10mm, #000 10.5mm);
+              pointer-events: none;
             }
           </style>
         </head>
         <body>
-          <div class="container">
-            ${logoUrl || restaurantName ? `
+          <div class="print-container">
+            <!-- Pattern Background -->
+            <div class="pattern-bg"></div>
+
+            <!-- Decorative Borders -->
+            <div class="decorative-border"></div>
+            <div class="inner-border"></div>
+            
+            <!-- Corner Decorations -->
+            <div class="corner-decoration corner-top-left"></div>
+            <div class="corner-decoration corner-top-right"></div>
+            <div class="corner-decoration corner-bottom-left"></div>
+            <div class="corner-decoration corner-bottom-right"></div>
+
+            <!-- Main Content -->
+            <div class="content">
+              <!-- Restaurant Header -->
               <div class="restaurant-header">
-                ${logoUrl ? `<img src="${logoUrl}" alt="Restaurant Logo" class="restaurant-logo" />` : ''}
-                ${restaurantName ? `<div class="restaurant-name">${restaurantName}</div>` : ''}
+                <div class="restaurant-info">
+                  ${restaurantName ? `
+                    <div style="flex: 1; text-align: ${isRTL ? 'right' : 'left'};">
+                      <div class="restaurant-name">${restaurantName}</div>
+                      <div class="restaurant-tagline">${isRTL ? 'تجربة طعام استثنائية' : 'Exceptional Dining Experience'}</div>
+                    </div>
+                  ` : ''}
+                  ${logoUrl ? `
+                    <div>
+                      <img src="${logoUrl}" alt="Restaurant Logo" class="restaurant-logo" />
+                    </div>
+                  ` : ''}
+                </div>
               </div>
-            ` : ''}
-            <h1>${isRTL ? 'طاولة' : 'Table'} ${table.tableNumber}</h1>
-            <div class="info">
-              <p>${isRTL ? 'السعة' : 'Capacity'}: ${table.capacity} ${isRTL ? 'شخص' : 'guests'}</p>
-              <p>${isRTL ? 'الموقع' : 'Location'}: ${table.location}</p>
-            </div>
-            <img src="${qrImageUrl}" alt="QR Code for Table ${table.tableNumber}" class="qr-image" />
-            <p class="qr-code-text">${table.qrCode}</p>
-            <div class="footer">
-              <p>${isRTL ? 'امسح الرمز لعرض القائمة وتقديم الطلبات' : 'Scan to view menu and place orders'}</p>
+
+              <!-- Table Section -->
+              <div class="table-section">
+                <div class="table-number-label">${isRTL ? 'طاولة رقم' : 'Table Number'}</div>
+                <div class="table-number">${table.tableNumber}</div>
+                
+                <div class="table-details">
+                  <div class="detail-item">
+                    <span class="detail-icon">👥</span>
+                    <span>${table.capacity} ${isRTL ? 'شخص' : 'Guests'}</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-icon">📍</span>
+                    <span>${table.location}</span>
+                  </div>
+                </div>
+
+                <div class="divider-line"></div>
+
+                <!-- QR Code -->
+                <div class="qr-section">
+                  <div class="qr-instruction">
+                    ${isRTL ? 'امسح الرمز لعرض القائمة' : 'Scan to View Menu'}
+                  </div>
+                  <div class="qr-container">
+                    <img src="${qrImageUrl}" alt="QR Code" class="qr-image" />
+                  </div>
+                  <div class="qr-code-text">${table.qrCode}</div>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div class="footer">
+                <div class="footer-text">
+                  ${isRTL ? 'استمتع بوجبتك وشاركنا تجربتك' : 'Enjoy your meal and share your experience'}
+                </div>
+              </div>
             </div>
           </div>
+
           <script>
             window.onload = function() {
               setTimeout(function() {
                 window.print();
-              }, 1000);
+              }, 500);
             }
           </script>
         </body>
