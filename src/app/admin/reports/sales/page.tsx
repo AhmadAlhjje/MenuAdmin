@@ -215,9 +215,6 @@ export default function SalesReportPage() {
                       {isRTL ? 'الجلسات' : 'Sessions'}
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-semibold text-secondary-700 dark:text-secondary-300 uppercase tracking-wider">
-                      {isRTL ? 'الطلبات' : 'Orders'}
-                    </th>
-                    <th className="px-6 py-3 text-right text-xs font-semibold text-secondary-700 dark:text-secondary-300 uppercase tracking-wider">
                       {isRTL ? 'متوسط الجلسة' : 'Avg/Session'}
                     </th>
                   </tr>
@@ -258,11 +255,6 @@ export default function SalesReportPage() {
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <span className="font-semibold text-secondary-900 dark:text-secondary-100">
-                            {data.ordersCount || '-'}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
                           <span className="font-semibold text-primary-600 dark:text-primary-400">
                             ل.س {avgPerSession.toFixed(0)}
                           </span>
@@ -284,11 +276,6 @@ export default function SalesReportPage() {
                     <td className="px-6 py-4">
                       <span className="font-bold text-secondary-900 dark:text-secondary-100">
                         {totals.totalSessions}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="font-bold text-secondary-900 dark:text-secondary-100">
-                        {salesData.reduce((sum, data) => sum + (data.ordersCount || 0), 0)}
                       </span>
                     </td>
                     <td className="px-6 py-4">
