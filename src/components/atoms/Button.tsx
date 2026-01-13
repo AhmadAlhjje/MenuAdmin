@@ -27,11 +27,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       'font-medium rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2 whitespace-nowrap';
 
     const variants = {
-      primary: 'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700',
-      secondary: 'bg-secondary-100 text-secondary-900 hover:bg-secondary-200 dark:bg-secondary-800 dark:text-secondary-100 dark:hover:bg-secondary-700',
-      danger: 'bg-danger-500 text-white hover:bg-danger-600 active:bg-danger-700',
-      success: 'bg-success-500 text-white hover:bg-success-600 active:bg-success-700',
-      outline: 'border-2 border-primary-500 text-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900 active:bg-primary-100',
+      primary: 'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 shadow-md hover:shadow-lg dark:bg-primary-600 dark:hover:bg-primary-500',
+      secondary: 'bg-surface dark:bg-surface-dark text-text-primary-light dark:text-text-primary-dark border border-border-light dark:border-border-dark hover:bg-background-light dark:hover:bg-background-dark shadow-sm',
+      danger: 'bg-error-500 text-white hover:bg-error-600 active:bg-error-700 shadow-md hover:shadow-lg',
+      success: 'bg-success-500 text-white hover:bg-success-600 active:bg-success-700 shadow-md hover:shadow-lg',
+      outline: 'border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white dark:border-primary-400 dark:text-primary-400 dark:hover:bg-primary-400 active:scale-95',
     };
 
     const sizes = {

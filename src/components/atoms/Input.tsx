@@ -15,29 +15,30 @@ export const Input = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, In
     const Tag = as as any;
 
     return (
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1.5">
         {label && (
-          <label className="text-sm font-medium text-secondary-700 dark:text-secondary-300">
+          <label className="text-sm font-medium text-text-primary-light dark:text-text-primary-dark">
             {label}
           </label>
         )}
         <Tag
           ref={ref}
           className={clsx(
-            'px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg border-2 transition-colors duration-200',
-            'bg-white dark:bg-secondary-800',
-            'text-sm sm:text-base text-secondary-900 dark:text-secondary-100',
-            'placeholder-secondary-400 dark:placeholder-secondary-500',
-            'border-secondary-200 dark:border-secondary-700',
-            'focus:outline-none focus:border-primary-500 dark:focus:border-primary-400',
+            'px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all duration-200',
+            'bg-surface dark:bg-surface-dark',
+            'text-sm sm:text-base text-text-primary-light dark:text-text-primary-dark',
+            'placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark',
+            'border-border-light dark:border-border-dark',
+            'focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-100 dark:focus:ring-primary-900/30',
+            'hover:border-primary-300 dark:hover:border-primary-700',
             'w-full',
-            error && 'border-danger-500 focus:border-danger-500',
+            error && 'border-error-500 focus:border-error-500 focus:ring-error-100 dark:focus:ring-error-900/30',
             className
           )}
           {...props}
         />
-        {error && <p className="text-xs font-medium text-danger-500">{error}</p>}
-        {helperText && <p className="text-xs text-secondary-500">{helperText}</p>}
+        {error && <p className="text-xs font-medium text-error-600 dark:text-error-400">{error}</p>}
+        {helperText && <p className="text-xs text-text-secondary-light dark:text-text-secondary-dark">{helperText}</p>}
       </div>
     );
   }
