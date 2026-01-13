@@ -12,16 +12,19 @@ const config: Config = {
         background: {
           DEFAULT: '#FFFFFF',
           light: '#FFF8F5',
-          dark: '#1A202C',
+          dark: '#0A0E14',
+          'dark-elevated': '#151922',
         },
         surface: {
           DEFAULT: '#FFFFFF',
-          dark: '#2D3748',
+          light: '#FAFBFC',
+          dark: '#1A1F2E',
+          'dark-hover': '#222936',
         },
 
         // الألوان الرئيسية - البرتقالي
         primary: {
-          50: '#FFF4F0',
+          50: '#FFF5F0',
           100: '#FFE8DD',
           200: '#FFD1BB',
           300: '#FFBA99',
@@ -31,16 +34,49 @@ const config: Config = {
           700: '#CC4E24',
           800: '#B0431F',
           900: '#943819',
+          950: '#7A2F15',
           DEFAULT: '#FF6B35',
         },
 
         // اللون المميز - الأحمر
         accent: {
-          50: '#FFEBEE',
-          100: '#FFCDD2',
-          200: '#EF9A9A',
-          300: '#E57373',
-          400: '#FF6E6E',
+          50: '#FFF1F0',
+          100: '#FFDDDB',
+          200: '#FFBBB8',
+          300: '#FF9994',
+          400: '#FF7770',
+          500: '#FF5252',
+          600: '#F44336',
+          700: '#E63946',
+          800: '#D32F2F',
+          900: '#B71C1C',
+          950: '#8B1414',
+          DEFAULT: '#FF5252',
+        },
+
+        // النجاح - الأخضر
+        success: {
+          50: '#F0F9F4',
+          100: '#E1F3E9',
+          200: '#C3E7D3',
+          300: '#9DD9B8',
+          400: '#66BB6A',
+          500: '#4CAF50',
+          600: '#43A047',
+          700: '#388E3C',
+          800: '#2E7D32',
+          900: '#1B5E20',
+          950: '#154518',
+          DEFAULT: '#4CAF50',
+        },
+
+        // الخطأ
+        error: {
+          50: '#FFF1F0',
+          100: '#FFDDDB',
+          200: '#FFBBB8',
+          300: '#FF9994',
+          400: '#FF7770',
           500: '#FF5252',
           600: '#F44336',
           700: '#E63946',
@@ -49,63 +85,74 @@ const config: Config = {
           DEFAULT: '#FF5252',
         },
 
-        // النجاح - الأخضر
-        success: {
-          50: '#E8F5E9',
-          100: '#C8E6C9',
-          200: '#A5D6A7',
-          300: '#81C784',
-          400: '#66BB6A',
-          500: '#4CAF50',
-          600: '#43A047',
-          700: '#388E3C',
-          800: '#2E7D32',
-          900: '#1B5E20',
-          DEFAULT: '#4CAF50',
-        },
-
-        // الخطأ
-        error: {
-          50: '#FFEBEE',
-          100: '#FFCDD2',
-          500: '#FF5252',
-          600: '#F44336',
-          700: '#E63946',
-          DEFAULT: '#FF5252',
-        },
-
         // التحذير
         warning: {
-          50: '#FFF3E0',
-          100: '#FFE0B2',
+          50: '#FFF8F0',
+          100: '#FFEEDD',
+          200: '#FFDBB0',
+          300: '#FFC883',
+          400: '#FFB556',
           500: '#FFA726',
           600: '#FB8C00',
           700: '#F57C00',
+          800: '#EF6C00',
+          900: '#E65100',
           DEFAULT: '#FFA726',
         },
 
         // النصوص
         text: {
           primary: {
-            light: '#2C3E50',
+            light: '#1A202C',
             dark: '#F7FAFC',
           },
           secondary: {
-            light: '#5D6D7E',
-            dark: '#CBD5E0',
+            light: '#4A5568',
+            dark: '#E2E8F0',
           },
           muted: {
-            light: '#95A5A6',
-            dark: '#A0AEC0',
+            light: '#718096',
+            dark: '#CBD5E0',
           },
         },
 
         // الحدود
         border: {
-          light: '#F0E6DC',
-          DEFAULT: '#E2E8F0',
-          dark: '#4A5568',
+          light: '#E2E8F0',
+          DEFAULT: '#CBD5E0',
+          dark: '#2D3748',
         },
+
+        // ألوان إضافية للتنوع
+        info: {
+          50: '#E3F2FD',
+          100: '#BBDEFB',
+          200: '#90CAF9',
+          300: '#64B5F6',
+          400: '#42A5F5',
+          500: '#2196F3',
+          600: '#1E88E5',
+          700: '#1976D2',
+          800: '#1565C0',
+          900: '#0D47A1',
+          DEFAULT: '#2196F3',
+        },
+      },
+      boxShadow: {
+        'glow-primary': '0 0 25px rgba(255, 107, 53, 0.4), 0 0 50px rgba(255, 107, 53, 0.1)',
+        'glow-success': '0 0 25px rgba(76, 175, 80, 0.4), 0 0 50px rgba(76, 175, 80, 0.1)',
+        'glow-accent': '0 0 25px rgba(255, 82, 82, 0.4), 0 0 50px rgba(255, 82, 82, 0.1)',
+        'glow-info': '0 0 25px rgba(33, 150, 243, 0.4), 0 0 50px rgba(33, 150, 243, 0.1)',
+        'soft': '0 2px 8px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03)',
+        'soft-lg': '0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04)',
+        'soft-xl': '0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06)',
+        'dark': '0 4px 20px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3)',
+        'dark-lg': '0 8px 32px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4)',
+        'inner-soft': 'inset 0 2px 4px rgba(0, 0, 0, 0.06)',
+        'inner-dark': 'inset 0 2px 8px rgba(0, 0, 0, 0.3)',
+      },
+      backdropBlur: {
+        xs: '2px',
       },
     },
   },

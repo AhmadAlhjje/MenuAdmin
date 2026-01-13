@@ -66,10 +66,10 @@ export default function DashboardPage() {
       <div className="p-4 sm:p-6 lg:p-8">
         {/* Stats Overview */}
         {status === 'loading' && (
-          <Card className="mb-8">
+          <Card className="mb-8 bg-gradient-to-br from-background-light to-surface dark:from-background-dark-elevated dark:to-surface-dark border-2 dark:border-primary-900/30">
             <div className="flex flex-col items-center justify-center py-16">
-              <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-200 dark:border-primary-800 border-t-primary-500 mb-4"></div>
-              <p className="text-text-secondary-light dark:text-text-secondary-dark">{isRTL ? 'جاري التحميل...' : 'Loading...'}</p>
+              <div className="animate-spin rounded-full h-14 w-14 border-4 border-primary-200 dark:border-primary-800 border-t-primary-500 mb-4 shadow-glow-primary dark:shadow-glow-primary"></div>
+              <p className="text-text-secondary-light dark:text-text-secondary-dark font-medium">{isRTL ? 'جاري التحميل...' : 'Loading...'}</p>
             </div>
           </Card>
         )}
@@ -78,68 +78,68 @@ export default function DashboardPage() {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {/* Active Sessions */}
-              <Card className="border-l-4 border-l-primary-500 hover:shadow-xl transition-all duration-300">
+              <Card className="border-l-4 border-l-primary-500 dark:border-l-primary-400 hover:shadow-soft-xl dark:hover:shadow-glow-primary hover:border-primary-600 dark:hover:border-primary-300 transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1">
+                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
                       {isRTL ? 'الجلسات النشطة' : 'Active Sessions'}
                     </p>
-                    <p className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark">
+                    <p className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                       {stats.activeSessions}
                     </p>
                   </div>
-                  <div className="w-14 h-14 rounded-xl bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-primary transition-all dark:shadow-inner-dark">
                     <Activity size={28} className="text-primary-500 dark:text-primary-400" />
                   </div>
                 </div>
               </Card>
 
               {/* Today's Sales */}
-              <Card className="border-l-4 border-l-success-500 hover:shadow-xl transition-all duration-300">
+              <Card className="border-l-4 border-l-success-500 dark:border-l-success-400 hover:shadow-soft-xl dark:hover:shadow-glow-success hover:border-success-600 dark:hover:border-success-300 transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1">
+                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
                       {isRTL ? 'مبيعات اليوم' : "Today's Sales"}
                     </p>
-                    <p className="text-3xl font-bold text-success-600 dark:text-success-400">
+                    <p className="text-3xl font-bold text-success-600 dark:text-success-400 group-hover:scale-105 transition-transform">
                       ل.س {parseFloat(stats.todaySales).toFixed(0)}
                     </p>
                   </div>
-                  <div className="w-14 h-14 rounded-xl bg-success-50 dark:bg-success-900/20 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-success-50 to-success-100 dark:from-success-900/30 dark:to-success-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-success transition-all dark:shadow-inner-dark">
                     <span className="text-2xl font-bold text-success-600 dark:text-success-400">ل.س</span>
                   </div>
                 </div>
               </Card>
 
               {/* Active Orders */}
-              <Card className="border-l-4 border-l-warning-500 hover:shadow-xl transition-all duration-300">
+              <Card className="border-l-4 border-l-warning-500 dark:border-l-warning-400 hover:shadow-soft-xl hover:border-warning-600 dark:hover:border-warning-300 transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1">
+                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
                       {isRTL ? 'الطلبات النشطة' : 'Active Orders'}
                     </p>
-                    <p className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark">
+                    <p className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark group-hover:text-warning-600 dark:group-hover:text-warning-400 transition-colors">
                       {stats.activeOrders}
                     </p>
                   </div>
-                  <div className="w-14 h-14 rounded-xl bg-warning-50 dark:bg-warning-900/20 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-warning-50 to-warning-100 dark:from-warning-900/30 dark:to-warning-800/30 flex items-center justify-center shadow-soft group-hover:scale-110 transition-all dark:shadow-inner-dark">
                     <ShoppingCart size={28} className="text-warning-500 dark:text-warning-400" />
                   </div>
                 </div>
               </Card>
 
               {/* Avg Session Value */}
-              <Card className="border-l-4 border-l-accent-500 hover:shadow-xl transition-all duration-300">
+              <Card className="border-l-4 border-l-accent-500 dark:border-l-accent-400 hover:shadow-soft-xl dark:hover:shadow-glow-accent hover:border-accent-600 dark:hover:border-accent-300 transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1">
+                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
                       {isRTL ? 'متوسط الجلسة' : 'Avg Session'}
                     </p>
-                    <p className="text-3xl font-bold text-accent-600 dark:text-accent-400">
+                    <p className="text-3xl font-bold text-accent-600 dark:text-accent-400 group-hover:scale-105 transition-transform">
                       ل.س {parseFloat(stats.avgSessionValue || '0').toFixed(0)}
                     </p>
                   </div>
-                  <div className="w-14 h-14 rounded-xl bg-accent-50 dark:bg-accent-900/20 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-50 to-accent-100 dark:from-accent-900/30 dark:to-accent-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-accent transition-all dark:shadow-inner-dark">
                     <TrendingUp size={28} className="text-accent-500 dark:text-accent-400" />
                   </div>
                 </div>
@@ -147,35 +147,39 @@ export default function DashboardPage() {
             </div>
 
             {/* Table Occupancy */}
-            <Card className="mb-8 border-l-4 border-l-primary-500 hover:shadow-xl transition-all duration-300">
+            <Card className="mb-8 border-l-4 border-l-primary-500 dark:border-l-primary-400 hover:shadow-soft-xl dark:hover:shadow-glow-primary hover:border-primary-600 dark:hover:border-primary-300 transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-primary transition-all dark:shadow-inner-dark">
                     <Armchair size={24} className="text-primary-500 dark:text-primary-400" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-text-primary-light dark:text-text-primary-dark">
+                    <h3 className="text-lg font-bold text-text-primary-light dark:text-text-primary-dark group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                       {isRTL ? 'إشغال الطاولات' : 'Table Occupancy'}
                     </h3>
-                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark font-medium">
                       {stats.occupiedTables} {isRTL ? 'من' : 'of'} {stats.totalTables} {isRTL ? 'طاولات مشغولة' : 'tables occupied'}
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
+                  <p className="text-4xl font-bold text-primary-600 dark:text-primary-400 group-hover:scale-110 transition-transform drop-shadow-lg">
                     {stats.occupancyRate.toFixed(1)}%
                   </p>
                 </div>
               </div>
-              <div className="w-full bg-border-light dark:bg-border-dark rounded-full h-4 overflow-hidden shadow-inner">
+              <div className="relative w-full bg-gradient-to-r from-border-light to-border-DEFAULT dark:from-border-dark dark:to-background-dark rounded-full h-5 overflow-hidden shadow-inner dark:shadow-inner-dark">
                 <div
                   className={clsx(
-                    'h-full rounded-full transition-all duration-500 shadow-sm',
-                    stats.occupancyRate > 80 ? 'bg-error-500' : stats.occupancyRate > 50 ? 'bg-warning-500' : 'bg-success-500'
+                    'h-full rounded-full transition-all duration-700 ease-out relative overflow-hidden',
+                    stats.occupancyRate > 80 ? 'bg-gradient-to-r from-error-500 to-error-600 shadow-glow-accent dark:shadow-glow-accent' :
+                    stats.occupancyRate > 50 ? 'bg-gradient-to-r from-warning-500 to-warning-600 dark:from-warning-400 dark:to-warning-500' :
+                    'bg-gradient-to-r from-success-500 to-success-600 shadow-glow-success dark:shadow-glow-success'
                   )}
                   style={{ width: `${stats.occupancyRate}%` }}
-                ></div>
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 dark:via-white/20 to-transparent animate-shimmer"></div>
+                </div>
               </div>
             </Card>
           </>
@@ -191,19 +195,19 @@ export default function DashboardPage() {
               const Icon = link.icon;
               return (
                 <Link key={link.href} href={link.href}>
-                  <Card className="cursor-pointer hover:shadow-xl hover:border-primary-500 hover:scale-105 transition-all duration-300 h-full group">
+                  <Card className="cursor-pointer hover:shadow-soft-xl hover:border-primary-500 dark:hover:border-primary-400 hover:scale-105 transition-all duration-300 h-full group">
                     <div className="flex flex-col items-center justify-center text-center gap-4">
                       <div className={clsx(
-                        'p-4 rounded-xl transition-all duration-300 group-hover:scale-110',
-                        link.color === 'primary' && 'bg-primary-50 dark:bg-primary-900/20',
-                        link.color === 'success' && 'bg-success-50 dark:bg-success-900/20',
-                        link.color === 'info' && 'bg-primary-50 dark:bg-primary-900/20',
-                        link.color === 'warning' && 'bg-warning-50 dark:bg-warning-900/20'
+                        'p-5 rounded-2xl transition-all duration-300 group-hover:scale-110 shadow-soft',
+                        link.color === 'primary' && 'bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 group-hover:shadow-glow-primary',
+                        link.color === 'success' && 'bg-gradient-to-br from-success-50 to-success-100 dark:from-success-900/20 dark:to-success-800/20 group-hover:shadow-glow-success',
+                        link.color === 'info' && 'bg-gradient-to-br from-info-50 to-info-100 dark:from-info-900/20 dark:to-info-800/20',
+                        link.color === 'warning' && 'bg-gradient-to-br from-warning-50 to-warning-100 dark:from-warning-900/20 dark:to-warning-800/20'
                       )}>
-                        <Icon size={36} className={clsx(
+                        <Icon size={40} className={clsx(
                           link.color === 'primary' && 'text-primary-500 dark:text-primary-400',
                           link.color === 'success' && 'text-success-500 dark:text-success-400',
-                          link.color === 'info' && 'text-primary-500 dark:text-primary-400',
+                          link.color === 'info' && 'text-info-500 dark:text-info-400',
                           link.color === 'warning' && 'text-warning-500 dark:text-warning-400'
                         )} />
                       </div>
@@ -225,16 +229,16 @@ export default function DashboardPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Link href="/admin/reports/popular-items">
-              <Card className="cursor-pointer hover:shadow-xl hover:border-warning-500 hover:scale-[1.02] transition-all duration-300 group">
+              <Card className="cursor-pointer hover:shadow-soft-xl hover:border-warning-500 dark:hover:border-warning-400 hover:scale-[1.02] transition-all duration-300 group">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-warning-50 dark:bg-warning-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <TrendingUp size={28} className="text-warning-500 dark:text-warning-400" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-warning-50 to-warning-100 dark:from-warning-900/20 dark:to-warning-800/20 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-soft">
+                    <TrendingUp size={32} className="text-warning-500 dark:text-warning-400" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark group-hover:text-warning-600 dark:group-hover:text-warning-400 transition-colors">
+                    <h3 className="text-lg font-bold text-text-primary-light dark:text-text-primary-dark group-hover:text-warning-600 dark:group-hover:text-warning-400 transition-colors">
                       {isRTL ? 'الأصناف الأكثر طلباً' : 'Popular Items'}
                     </h3>
-                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark font-medium">
                       {isRTL ? 'تقرير بالأصناف الأكثر مبيعاً' : 'Best-selling items report'}
                     </p>
                   </div>
@@ -243,16 +247,16 @@ export default function DashboardPage() {
             </Link>
 
             <Link href="/admin/reports/sales">
-              <Card className="cursor-pointer hover:shadow-xl hover:border-success-500 hover:scale-[1.02] transition-all duration-300 group">
+              <Card className="cursor-pointer hover:shadow-soft-xl hover:border-success-500 dark:hover:border-success-400 hover:scale-[1.02] transition-all duration-300 group">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-success-50 dark:bg-success-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <BarChart3 size={28} className="text-success-500 dark:text-success-400" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-success-50 to-success-100 dark:from-success-900/20 dark:to-success-800/20 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-soft group-hover:shadow-glow-success">
+                    <BarChart3 size={32} className="text-success-500 dark:text-success-400" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark group-hover:text-success-600 dark:group-hover:text-success-400 transition-colors">
+                    <h3 className="text-lg font-bold text-text-primary-light dark:text-text-primary-dark group-hover:text-success-600 dark:group-hover:text-success-400 transition-colors">
                       {isRTL ? 'تقارير المبيعات' : 'Sales Report'}
                     </h3>
-                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+                    <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark font-medium">
                       {isRTL ? 'تقرير مفصل بالمبيعات والإيرادات' : 'Detailed sales and revenue report'}
                     </p>
                   </div>

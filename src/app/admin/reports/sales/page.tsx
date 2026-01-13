@@ -72,49 +72,49 @@ export default function SalesReportPage() {
       <div className="p-8">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card>
+          <Card className="border-l-4 border-l-success-500 dark:border-l-success-400 hover:shadow-soft-xl dark:hover:shadow-glow-success transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-secondary-600 dark:text-secondary-400 mb-1">
+                <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
                   {isRTL ? 'إجمالي المبيعات' : 'Total Sales'}
                 </p>
-                <p className="text-3xl font-bold text-success-600 dark:text-success-400">
+                <p className="text-3xl font-bold text-success-600 dark:text-success-400 group-hover:scale-105 transition-transform">
                   ل.س {parseFloat(totals.totalSales || '0').toFixed(0)}
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-lg bg-success-100 dark:bg-success-900/20 flex items-center justify-center">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-success-50 to-success-100 dark:from-success-900/30 dark:to-success-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-success transition-all dark:shadow-inner-dark">
                 <span className="text-2xl font-bold text-success-600 dark:text-success-400">ل.س</span>
               </div>
             </div>
           </Card>
 
-          <Card>
+          <Card className="border-l-4 border-l-info-500 dark:border-l-info-400 hover:shadow-soft-xl dark:hover:shadow-glow-info transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-secondary-600 dark:text-secondary-400 mb-1">
+                <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
                   {isRTL ? 'إجمالي الجلسات' : 'Total Sessions'}
                 </p>
-                <p className="text-3xl font-bold text-secondary-900 dark:text-secondary-100">
+                <p className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark group-hover:text-info-600 dark:group-hover:text-info-400 transition-colors">
                   {totals.totalSessions}
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-lg bg-info-100 dark:bg-info-900/20 flex items-center justify-center">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-info-50 to-info-100 dark:from-info-900/30 dark:to-info-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-info transition-all dark:shadow-inner-dark">
                 <Users size={24} className="text-info-600 dark:text-info-400" />
               </div>
             </div>
           </Card>
 
-          <Card>
+          <Card className="border-l-4 border-l-primary-500 dark:border-l-primary-400 hover:shadow-soft-xl dark:hover:shadow-glow-primary transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-secondary-600 dark:text-secondary-400 mb-1">
+                <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
                   {isRTL ? 'متوسط قيمة الجلسة' : 'Avg Session Value'}
                 </p>
-                <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
+                <p className="text-3xl font-bold text-primary-600 dark:text-primary-400 group-hover:scale-105 transition-transform">
                   ل.س {isNaN(parseFloat(totals.avgSessionValue)) ? '0.00' : parseFloat(totals.avgSessionValue).toFixed(0)}
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/20 flex items-center justify-center">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-primary transition-all dark:shadow-inner-dark">
                 <TrendingUp size={24} className="text-primary-600 dark:text-primary-400" />
               </div>
             </div>
@@ -122,11 +122,11 @@ export default function SalesReportPage() {
         </div>
 
         {/* Filter Buttons */}
-        <Card className="mb-6">
+        <Card className="mb-6 dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated border-2 dark:border-border-dark">
           <div className="flex items-center justify-between" dir={isRTL ? 'rtl' : 'ltr'}>
             <div className="flex items-center gap-2">
-              <Calendar size={20} className="text-secondary-600 dark:text-secondary-400" />
-              <span className="text-sm font-semibold text-secondary-700 dark:text-secondary-300">
+              <Calendar size={20} className="text-text-secondary-light dark:text-text-secondary-dark" />
+              <span className="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark">
                 {isRTL ? 'تجميع البيانات حسب:' : 'Group by:'}
               </span>
             </div>
@@ -167,25 +167,25 @@ export default function SalesReportPage() {
 
         {/* Loading State */}
         {status === 'loading' && (
-          <Card>
+          <Card className="dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated border-2 dark:border-primary-900/30">
             <div className="flex flex-col items-center justify-center py-16">
-              <div className="animate-spin rounded-full h-12 w-12 border-2 border-primary-500 border-t-transparent mb-4"></div>
-              <p className="text-secondary-600 dark:text-secondary-400">{isRTL ? 'جاري التحميل...' : 'Loading...'}</p>
+              <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-200 dark:border-primary-800 border-t-primary-500 mb-4 shadow-glow-primary dark:shadow-glow-primary"></div>
+              <p className="text-text-secondary-light dark:text-text-secondary-dark font-medium">{isRTL ? 'جاري التحميل...' : 'Loading...'}</p>
             </div>
           </Card>
         )}
 
         {/* Empty State */}
         {status === 'success' && salesData.length === 0 && (
-          <Card>
+          <Card className="dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
             <div className="flex flex-col items-center justify-center py-16">
-              <div className="w-20 h-20 rounded-full bg-secondary-100 dark:bg-secondary-800 flex items-center justify-center mb-4">
-                <BarChart3 size={40} className="text-secondary-400" />
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-border-light to-surface dark:from-border-dark dark:to-background-dark flex items-center justify-center mb-4 shadow-soft dark:shadow-inner-dark">
+                <BarChart3 size={40} className="text-text-muted-light dark:text-text-muted-dark" />
               </div>
-              <h3 className="text-lg font-semibold text-secondary-900 dark:text-secondary-100 mb-2">
+              <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-2">
                 {isRTL ? 'لا توجد بيانات' : 'No data available'}
               </h3>
-              <p className="text-sm text-secondary-600 dark:text-secondary-400">
+              <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark">
                 {isRTL ? 'لا توجد مبيعات في الفترة المحددة' : 'No sales found for the selected period'}
               </p>
             </div>
@@ -194,43 +194,43 @@ export default function SalesReportPage() {
 
         {/* Sales Data Table */}
         {status === 'success' && salesData.length > 0 && (
-          <Card className="overflow-hidden">
+          <Card className="overflow-hidden dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated border-2 dark:border-border-dark">
             <div className="mb-4 flex items-center gap-2">
               <BarChart3 size={20} className="text-primary-600 dark:text-primary-400" />
-              <h3 className="text-lg font-bold text-secondary-900 dark:text-secondary-100">
+              <h3 className="text-lg font-bold text-text-primary-light dark:text-text-primary-dark">
                 {isRTL ? 'بيانات المبيعات' : 'Sales Data'}
               </h3>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto rounded-lg">
               <table className="w-full" dir={isRTL ? 'rtl' : 'ltr'}>
-                <thead className="bg-secondary-50 dark:bg-secondary-900/50">
+                <thead className="bg-gradient-to-r from-background-light to-surface dark:from-background-dark dark:to-surface-dark">
                   <tr>
-                    <th className="px-6 py-3 text-right text-xs font-semibold text-secondary-700 dark:text-secondary-300 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-semibold text-text-primary-light dark:text-text-primary-dark uppercase tracking-wider">
                       {isRTL ? 'التاريخ' : 'Date'}
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-semibold text-secondary-700 dark:text-secondary-300 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-semibold text-text-primary-light dark:text-text-primary-dark uppercase tracking-wider">
                       {isRTL ? 'المبيعات' : 'Sales'}
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-semibold text-secondary-700 dark:text-secondary-300 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-semibold text-text-primary-light dark:text-text-primary-dark uppercase tracking-wider">
                       {isRTL ? 'الجلسات' : 'Sessions'}
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-semibold text-secondary-700 dark:text-secondary-300 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-right text-xs font-semibold text-text-primary-light dark:text-text-primary-dark uppercase tracking-wider">
                       {isRTL ? 'متوسط الجلسة' : 'Avg/Session'}
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-secondary-200 dark:divide-secondary-700">
+                <tbody className="divide-y divide-border-light dark:divide-border-dark">
                   {salesData.map((data, index) => {
                     const avgPerSession = data.sessionsCount > 0
                       ? parseFloat(data.totalSales) / data.sessionsCount
                       : 0;
 
                     return (
-                      <tr key={index} className="hover:bg-secondary-50 dark:hover:bg-secondary-800/50 transition-colors">
+                      <tr key={index} className="hover:bg-background-light dark:hover:bg-surface-dark-hover transition-all duration-200">
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
-                            <Calendar size={16} className="text-secondary-400" />
-                            <span className="font-medium text-secondary-900 dark:text-secondary-100">
+                            <Calendar size={16} className="text-text-muted-light dark:text-text-muted-dark" />
+                            <span className="font-medium text-text-primary-light dark:text-text-primary-dark">
                               {formatDate(data.date)}
                             </span>
                           </div>
@@ -249,7 +249,7 @@ export default function SalesReportPage() {
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
                             <Users size={16} className="text-info-600 dark:text-info-400" />
-                            <span className="font-semibold text-secondary-900 dark:text-secondary-100">
+                            <span className="font-semibold text-text-primary-light dark:text-text-primary-dark">
                               {data.sessionsCount}
                             </span>
                           </div>
@@ -263,23 +263,23 @@ export default function SalesReportPage() {
                     );
                   })}
                 </tbody>
-                <tfoot className="bg-secondary-100 dark:bg-secondary-900/70">
+                <tfoot className="bg-gradient-to-r from-background-light to-surface dark:from-background-dark-elevated dark:to-surface-dark border-t-2 border-primary-500 dark:border-primary-400">
                   <tr>
-                    <td className="px-6 py-4 font-bold text-secondary-900 dark:text-secondary-100">
+                    <td className="px-6 py-4 font-bold text-text-primary-light dark:text-text-primary-dark">
                       {isRTL ? 'الإجمالي' : 'Total'}
                     </td>
                     <td className="px-6 py-4">
-                      <span className="text-lg font-bold text-success-600 dark:text-success-400">
+                      <span className="text-lg font-bold text-success-600 dark:text-success-400 drop-shadow-lg">
                         ل.س {parseFloat(totals.totalSales).toFixed(0)}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="font-bold text-secondary-900 dark:text-secondary-100">
+                      <span className="font-bold text-text-primary-light dark:text-text-primary-dark">
                         {totals.totalSessions}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="font-bold text-primary-600 dark:text-primary-400">
+                      <span className="font-bold text-primary-600 dark:text-primary-400 drop-shadow-lg">
                         ل.س {isNaN(parseFloat(totals.avgSessionValue)) ? '0.00' : parseFloat(totals.avgSessionValue).toFixed(0)}
                       </span>
                     </td>

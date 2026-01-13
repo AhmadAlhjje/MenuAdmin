@@ -117,14 +117,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
   const sidebarContent = (
     <>
       {/* Logo and Close Button */}
-      <div className="p-6 border-b border-border-light dark:border-border-dark">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-primary-500 dark:text-primary-400">
+      <div className="p-6 border-b border-border-light dark:border-border-dark bg-gradient-to-r from-background-light to-surface dark:from-background-dark-elevated dark:to-surface-dark relative overflow-hidden">
+        {/* تأثير وهج خلفي في Dark Mode */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent dark:from-primary-500/10 dark:to-transparent pointer-events-none"></div>
+        <div className="flex items-center justify-between relative z-10">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-400 dark:to-primary-500 bg-clip-text text-transparent drop-shadow-lg">
             MenuAdmin
           </h1>
           <button
             onClick={onToggle}
-            className="p-2 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all text-text-primary-light dark:text-text-primary-dark"
+            className="p-2 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-all text-text-primary-light dark:text-text-primary-dark hover:scale-110 active:scale-95 dark:hover:shadow-glow-primary"
             aria-label="Close sidebar"
           >
             <X size={24} />
@@ -157,8 +159,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
                           className={clsx(
                             'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200',
                             isActive(item.href)
-                              ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-medium border-l-4 border-l-primary-500'
-                              : 'text-text-secondary-light dark:text-text-secondary-dark hover:bg-background-light dark:hover:bg-background-dark hover:text-primary-500 dark:hover:text-primary-400',
+                              ? 'bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 text-primary-600 dark:text-primary-400 font-semibold border-l-4 border-l-primary-500 shadow-soft'
+                              : 'text-text-secondary-light dark:text-text-secondary-dark hover:bg-gradient-to-r hover:from-background-light hover:to-surface dark:hover:from-background-dark dark:hover:to-surface-dark hover:text-primary-500 dark:hover:text-primary-400',
                             isLoadingThis && 'opacity-70 pointer-events-none'
                           )}
                         >
@@ -183,8 +185,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
                       className={clsx(
                         'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200',
                         isActive(route.href || '')
-                          ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-medium border-l-4 border-l-primary-500'
-                          : 'text-text-secondary-light dark:text-text-secondary-dark hover:bg-background-light dark:hover:bg-background-dark hover:text-primary-500 dark:hover:text-primary-400',
+                          ? 'bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 text-primary-600 dark:text-primary-400 font-semibold border-l-4 border-l-primary-500 shadow-soft'
+                          : 'text-text-secondary-light dark:text-text-secondary-dark hover:bg-gradient-to-r hover:from-background-light hover:to-surface dark:hover:from-background-dark dark:hover:to-surface-dark hover:text-primary-500 dark:hover:text-primary-400',
                         isLoadingThis && 'opacity-70 pointer-events-none'
                       )}
                     >
@@ -204,16 +206,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-border-light dark:border-border-dark space-y-2">
+      <div className="p-4 border-t border-border-light dark:border-border-dark bg-gradient-to-r from-background-light to-surface dark:from-background-dark-elevated dark:to-surface-dark space-y-2 relative overflow-hidden">
+        {/* تأثير وهج خفيف */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-500/5 to-transparent dark:from-primary-500/10 dark:to-transparent pointer-events-none"></div>
         <button
           onClick={toggleTheme}
           className={clsx(
-            'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200',
-            'text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-500 dark:hover:text-primary-400'
+            'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 relative z-10',
+            'text-text-secondary-light dark:text-text-secondary-dark hover:bg-gradient-to-r hover:from-primary-50 hover:to-primary-100 dark:hover:from-primary-900/30 dark:hover:to-primary-800/30 hover:text-primary-500 dark:hover:text-primary-400 shadow-soft hover:scale-105 active:scale-95 dark:shadow-dark dark:hover:shadow-glow-primary'
           )}
         >
           {isDark ? <Sun size={20} className="flex-shrink-0" /> : <Moon size={20} className="flex-shrink-0" />}
-          <span className="text-sm">{isDark ? t('common.lightMode') : t('common.darkMode')}</span>
+          <span className="text-sm font-medium">{isDark ? t('common.lightMode') : t('common.darkMode')}</span>
         </button>
 
         <button
@@ -225,19 +229,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
             htmlElement.dir = i18n.language === 'en' ? 'rtl' : 'ltr';
           }}
           className={clsx(
-            'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
-            'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-900/30'
+            'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 relative z-10',
+            'bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 text-primary-600 dark:text-primary-400 hover:from-primary-100 hover:to-primary-200 dark:hover:from-primary-900/40 dark:hover:to-primary-800/40 shadow-soft hover:scale-105 active:scale-95 dark:shadow-dark dark:hover:shadow-glow-primary'
           )}
         >
-          <span className="flex-shrink-0">🌐</span>
+          <span className="flex-shrink-0 text-lg">🌐</span>
           <span>{i18n.language === 'en' ? 'العربية' : 'English'}</span>
         </button>
 
         <button
           onClick={handleLogout}
           className={clsx(
-            'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
-            'text-error-600 dark:text-error-400 hover:bg-error-50 dark:hover:bg-error-900/20'
+            'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 relative z-10',
+            'text-error-600 dark:text-error-400 hover:bg-gradient-to-r hover:from-error-50 hover:to-error-100 dark:hover:from-error-900/30 dark:hover:to-error-800/30 shadow-soft hover:scale-105 active:scale-95 dark:shadow-dark dark:hover:shadow-glow-accent'
           )}
         >
           <LogOut size={20} className="flex-shrink-0" />
@@ -252,8 +256,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
       {/* Loading Bar */}
       {isNavigating && (
         <div className="fixed top-0 left-0 right-0 z-[100]">
-          <div className="h-1 bg-primary-500 animate-pulse shadow-lg shadow-primary-500/50">
-            <div className="h-full bg-gradient-to-r from-transparent via-white to-transparent animate-shimmer"></div>
+          <div className="h-1.5 bg-gradient-to-r from-primary-500 to-primary-600 animate-pulse shadow-glow-primary">
+            <div className="h-full bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
           </div>
         </div>
       )}
@@ -271,8 +275,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
         className={clsx(
           'fixed top-0 h-screen bg-surface dark:bg-surface-dark',
           'flex flex-col transition-all duration-300 ease-in-out z-50',
-          'w-64 shadow-xl',
-          isRTL ? 'right-0 border-l border-border-light dark:border-border-dark' : 'left-0 border-r border-border-light dark:border-border-dark',
+          'w-64 shadow-xl dark:shadow-dark-lg',
+          'backdrop-blur-md dark:backdrop-blur-lg',
+          // تأثير حدود متوهجة في Dark Mode
+          isRTL ? 'right-0 border-l-2 border-border-light dark:border-primary-900/50' : 'left-0 border-r-2 border-border-light dark:border-primary-900/50',
           isRTL ? (
             isOpen ? 'translate-x-0' : 'translate-x-full'
           ) : (
