@@ -52,7 +52,7 @@ export const RootLayoutClient: React.FC<RootLayoutClientProps> = ({ children }) 
 
   return (
     <Providers>
-      <div className="flex min-h-screen bg-secondary-50 dark:bg-secondary-900">
+      <div className="flex min-h-screen bg-gradient-to-br from-secondary-50 via-white to-secondary-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
         {showSidebar && <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} onToggle={() => setSidebarOpen(!sidebarOpen)} />}
 
         <main
@@ -66,10 +66,10 @@ export const RootLayoutClient: React.FC<RootLayoutClientProps> = ({ children }) 
             <div className="sticky top-0 z-30">
               <button
                 onClick={() => setSidebarOpen(true)}
-                className={`m-4 p-2.5 sm:p-3 bg-white dark:bg-secondary-800 rounded-lg shadow-lg border border-secondary-200 dark:border-secondary-700 hover:bg-secondary-50 dark:hover:bg-secondary-700 transition-colors active:scale-95 ${sidebarOpen ? 'lg:hidden' : ''}`}
+                className={`m-4 p-2.5 sm:p-3 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-secondary-200 dark:border-slate-700 hover:bg-secondary-50 dark:hover:bg-slate-700 transition-all active:scale-95 ${sidebarOpen ? 'lg:hidden' : ''}`}
                 aria-label="Open menu"
               >
-                <Menu size={22} className="text-secondary-700 dark:text-secondary-300" />
+                <Menu size={22} className="text-secondary-700 dark:text-slate-300" />
               </button>
             </div>
           )}

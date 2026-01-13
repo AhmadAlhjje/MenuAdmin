@@ -66,9 +66,9 @@ export default function DashboardPage() {
       <div className="p-4 sm:p-6 lg:p-8">
         {/* Stats Overview */}
         {status === 'loading' && (
-          <Card className="mb-8 bg-gradient-to-br from-background-light to-surface dark:from-background-dark-elevated dark:to-surface-dark border-2 dark:border-primary-900/30">
+          <Card className="mb-8">
             <div className="flex flex-col items-center justify-center py-16">
-              <div className="animate-spin rounded-full h-14 w-14 border-4 border-primary-200 dark:border-primary-800 border-t-primary-500 mb-4 shadow-glow-primary dark:shadow-glow-primary"></div>
+              <div className="animate-spin rounded-full h-14 w-14 border-4 border-primary-200 dark:border-primary-600 border-t-primary-500 dark:border-t-primary-400 mb-4 shadow-glow-primary"></div>
               <p className="text-text-secondary-light dark:text-text-secondary-dark font-medium">{isRTL ? 'جاري التحميل...' : 'Loading...'}</p>
             </div>
           </Card>
@@ -78,7 +78,7 @@ export default function DashboardPage() {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {/* Active Sessions */}
-              <Card className="border-l-4 border-l-primary-500 dark:border-l-primary-400 hover:shadow-soft-xl dark:hover:shadow-glow-primary hover:border-primary-600 dark:hover:border-primary-300 transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
+              <Card className="border-l-4 border-l-primary-500 dark:border-l-primary-400 hover:shadow-soft-xl hover:border-primary-600 dark:hover:border-primary-300 transition-all duration-300 group">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
@@ -88,14 +88,14 @@ export default function DashboardPage() {
                       {stats.activeSessions}
                     </p>
                   </div>
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-primary transition-all dark:shadow-inner-dark">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-500/20 dark:to-primary-600/20 flex items-center justify-center shadow-soft group-hover:shadow-glow-primary transition-all">
                     <Activity size={28} className="text-primary-500 dark:text-primary-400" />
                   </div>
                 </div>
               </Card>
 
               {/* Today's Sales */}
-              <Card className="border-l-4 border-l-success-500 dark:border-l-success-400 hover:shadow-soft-xl dark:hover:shadow-glow-success hover:border-success-600 dark:hover:border-success-300 transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
+              <Card className="border-l-4 border-l-success-500 dark:border-l-success-400 hover:shadow-soft-xl hover:border-success-600 dark:hover:border-success-300 transition-all duration-300 group">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
@@ -105,14 +105,14 @@ export default function DashboardPage() {
                       ل.س {parseFloat(stats.todaySales).toFixed(0)}
                     </p>
                   </div>
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-success-50 to-success-100 dark:from-success-900/30 dark:to-success-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-success transition-all dark:shadow-inner-dark">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-success-50 to-success-100 dark:from-success-500/20 dark:to-success-600/20 flex items-center justify-center shadow-soft group-hover:shadow-glow-success transition-all">
                     <span className="text-2xl font-bold text-success-600 dark:text-success-400">ل.س</span>
                   </div>
                 </div>
               </Card>
 
               {/* Active Orders */}
-              <Card className="border-l-4 border-l-warning-500 dark:border-l-warning-400 hover:shadow-soft-xl hover:border-warning-600 dark:hover:border-warning-300 transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
+              <Card className="border-l-4 border-l-warning-500 dark:border-l-warning-400 hover:shadow-soft-xl hover:border-warning-600 dark:hover:border-warning-300 transition-all duration-300 group">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
@@ -122,14 +122,14 @@ export default function DashboardPage() {
                       {stats.activeOrders}
                     </p>
                   </div>
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-warning-50 to-warning-100 dark:from-warning-900/30 dark:to-warning-800/30 flex items-center justify-center shadow-soft group-hover:scale-110 transition-all dark:shadow-inner-dark">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-warning-50 to-warning-100 dark:from-warning-500/20 dark:to-warning-600/20 flex items-center justify-center shadow-soft group-hover:scale-110 transition-all">
                     <ShoppingCart size={28} className="text-warning-500 dark:text-warning-400" />
                   </div>
                 </div>
               </Card>
 
               {/* Avg Session Value */}
-              <Card className="border-l-4 border-l-accent-500 dark:border-l-accent-400 hover:shadow-soft-xl dark:hover:shadow-glow-accent hover:border-accent-600 dark:hover:border-accent-300 transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
+              <Card className="border-l-4 border-l-accent-500 dark:border-l-accent-400 hover:shadow-soft-xl hover:border-accent-600 dark:hover:border-accent-300 transition-all duration-300 group">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
@@ -139,7 +139,7 @@ export default function DashboardPage() {
                       ل.س {parseFloat(stats.avgSessionValue || '0').toFixed(0)}
                     </p>
                   </div>
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-50 to-accent-100 dark:from-accent-900/30 dark:to-accent-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-accent transition-all dark:shadow-inner-dark">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-50 to-accent-100 dark:from-accent-500/20 dark:to-accent-600/20 flex items-center justify-center shadow-soft group-hover:shadow-glow-accent transition-all">
                     <TrendingUp size={28} className="text-accent-500 dark:text-accent-400" />
                   </div>
                 </div>
@@ -147,10 +147,10 @@ export default function DashboardPage() {
             </div>
 
             {/* Table Occupancy */}
-            <Card className="mb-8 border-l-4 border-l-primary-500 dark:border-l-primary-400 hover:shadow-soft-xl dark:hover:shadow-glow-primary hover:border-primary-600 dark:hover:border-primary-300 transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
+            <Card className="mb-8 border-l-4 border-l-primary-500 dark:border-l-primary-400 hover:shadow-soft-xl hover:border-primary-600 dark:hover:border-primary-300 transition-all duration-300 group">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-primary transition-all dark:shadow-inner-dark">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-500/20 dark:to-primary-600/20 flex items-center justify-center shadow-soft group-hover:shadow-glow-primary transition-all">
                     <Armchair size={24} className="text-primary-500 dark:text-primary-400" />
                   </div>
                   <div>

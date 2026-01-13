@@ -204,7 +204,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-border-light dark:border-border-dark bg-gradient-to-r from-background-light to-surface dark:from-background-dark-elevated dark:to-surface-dark space-y-2 relative overflow-hidden">
+      <div className="p-4 border-t border-secondary-200 dark:border-slate-700 bg-gradient-to-r from-secondary-50 to-white dark:from-slate-800 dark:to-slate-900 space-y-2 relative overflow-hidden">
         {/* تأثير وهج خفيف */}
         <div className="absolute inset-0 bg-gradient-to-t from-primary-500/5 to-transparent dark:from-primary-500/10 dark:to-transparent pointer-events-none"></div>
         <button
@@ -271,12 +271,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
       {/* Sidebar */}
       <aside
         className={clsx(
-          'fixed top-0 h-screen bg-surface dark:bg-surface-dark',
+          'fixed top-0 h-screen bg-white dark:bg-slate-900',
           'flex flex-col transition-all duration-300 ease-in-out z-50',
-          'w-64 shadow-xl dark:shadow-dark-lg',
+          'w-64 shadow-2xl dark:shadow-black/50',
           'backdrop-blur-md dark:backdrop-blur-lg',
           // تأثير حدود متوهجة في Dark Mode
-          isRTL ? 'right-0 border-l-2 border-border-light dark:border-primary-900/50' : 'left-0 border-r-2 border-border-light dark:border-primary-900/50',
+          isRTL ? 'right-0 border-l-2 border-secondary-200 dark:border-slate-700' : 'left-0 border-r-2 border-secondary-200 dark:border-slate-700',
           isRTL ? (
             isOpen ? 'translate-x-0' : 'translate-x-full'
           ) : (

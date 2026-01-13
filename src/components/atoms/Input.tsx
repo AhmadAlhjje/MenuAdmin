@@ -25,16 +25,15 @@ export const Input = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, In
           ref={ref}
           className={clsx(
             'px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border-2 transition-all duration-300',
-            'bg-surface dark:bg-surface-dark',
-            'text-sm sm:text-base text-text-primary-light dark:text-text-primary-dark',
-            'placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark',
-            'border-border-light dark:border-border-dark',
-            'focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-100 dark:focus:ring-primary-900/40',
-            'hover:border-primary-300 dark:hover:border-primary-600',
-            'shadow-soft focus:shadow-soft-lg dark:shadow-inner-dark dark:focus:shadow-dark',
+            'bg-white dark:bg-slate-800',
+            'text-sm sm:text-base text-secondary-900 dark:text-slate-100',
+            'placeholder:text-secondary-400 dark:placeholder:text-slate-500',
+            'border-secondary-300 dark:border-slate-600',
+            'focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-4 focus:ring-primary-100 dark:focus:ring-primary-500/20',
+            'hover:border-primary-300 dark:hover:border-primary-500',
+            'shadow-sm focus:shadow-md dark:shadow-black/20 dark:focus:shadow-black/40',
             'w-full backdrop-blur-sm',
-            'dark:bg-opacity-80',
-            error && 'border-error-500 focus:border-error-500 focus:ring-error-100 dark:focus:ring-error-900/40 dark:border-error-600',
+            error && 'border-error-500 focus:border-error-500 focus:ring-error-100 dark:focus:ring-error-500/20 dark:border-error-500',
             className
           )}
           {...props}

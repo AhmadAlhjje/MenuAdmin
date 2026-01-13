@@ -31,27 +31,28 @@ export const Modal: React.FC<ModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
       <div className={clsx(
-        'bg-white dark:bg-secondary-800 rounded-xl shadow-xl my-8',
+        'bg-white dark:bg-slate-800 rounded-xl shadow-2xl dark:shadow-black/50 my-8',
         'max-h-[calc(100vh-4rem)]',
+        'border border-secondary-200 dark:border-slate-700',
         sizes[size]
       )}>
         {/* Header */}
-        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-secondary-200 dark:border-secondary-700">
-          <h2 className="text-lg sm:text-xl font-semibold text-secondary-900 dark:text-secondary-100">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-secondary-200 dark:border-slate-700">
+          <h2 className="text-lg sm:text-xl font-semibold text-secondary-900 dark:text-slate-100">
             {title}
           </h2>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-secondary-100 dark:hover:bg-secondary-700 rounded-lg transition-colors flex-shrink-0"
+            className="p-1 hover:bg-secondary-100 dark:hover:bg-slate-700 rounded-lg transition-colors flex-shrink-0 text-secondary-700 dark:text-slate-300"
           >
             <X size={20} />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(100vh-16rem)]">{children}</div>
+        <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(100vh-16rem)] text-secondary-900 dark:text-slate-100">{children}</div>
 
         {/* Actions */}
         {actions && <div className="flex flex-col sm:flex-row gap-3 px-4 sm:px-6 pb-4 sm:pb-6 justify-end">{actions}</div>}

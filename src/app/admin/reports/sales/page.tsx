@@ -72,7 +72,7 @@ export default function SalesReportPage() {
       <div className="p-8">
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="border-l-4 border-l-success-500 dark:border-l-success-400 hover:shadow-soft-xl dark:hover:shadow-glow-success transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
+          <Card className="border-l-4 border-l-success-500 dark:border-l-success-400 hover:shadow-soft-xl transition-all duration-300 group">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
@@ -82,13 +82,13 @@ export default function SalesReportPage() {
                   ل.س {parseFloat(totals.totalSales || '0').toFixed(0)}
                 </p>
               </div>
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-success-50 to-success-100 dark:from-success-900/30 dark:to-success-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-success transition-all dark:shadow-inner-dark">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-success-50 to-success-100 dark:from-success-500/20 dark:to-success-600/20 flex items-center justify-center shadow-soft group-hover:shadow-glow-success transition-all">
                 <span className="text-2xl font-bold text-success-600 dark:text-success-400">ل.س</span>
               </div>
             </div>
           </Card>
 
-          <Card className="border-l-4 border-l-info-500 dark:border-l-info-400 hover:shadow-soft-xl dark:hover:shadow-glow-info transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
+          <Card className="border-l-4 border-l-info-500 dark:border-l-info-400 hover:shadow-soft-xl transition-all duration-300 group">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
@@ -98,13 +98,13 @@ export default function SalesReportPage() {
                   {totals.totalSessions}
                 </p>
               </div>
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-info-50 to-info-100 dark:from-info-900/30 dark:to-info-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-info transition-all dark:shadow-inner-dark">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-info-50 to-info-100 dark:from-info-500/20 dark:to-info-600/20 flex items-center justify-center shadow-soft group-hover:shadow-glow-info transition-all">
                 <Users size={24} className="text-info-600 dark:text-info-400" />
               </div>
             </div>
           </Card>
 
-          <Card className="border-l-4 border-l-primary-500 dark:border-l-primary-400 hover:shadow-soft-xl dark:hover:shadow-glow-primary transition-all duration-300 group dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
+          <Card className="border-l-4 border-l-primary-500 dark:border-l-primary-400 hover:shadow-soft-xl transition-all duration-300 group">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark mb-1 font-medium">
@@ -114,7 +114,7 @@ export default function SalesReportPage() {
                   ل.س {isNaN(parseFloat(totals.avgSessionValue)) ? '0.00' : parseFloat(totals.avgSessionValue).toFixed(0)}
                 </p>
               </div>
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 flex items-center justify-center shadow-soft group-hover:shadow-glow-primary transition-all dark:shadow-inner-dark">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-500/20 dark:to-primary-600/20 flex items-center justify-center shadow-soft group-hover:shadow-glow-primary transition-all">
                 <TrendingUp size={24} className="text-primary-600 dark:text-primary-400" />
               </div>
             </div>
@@ -122,7 +122,7 @@ export default function SalesReportPage() {
         </div>
 
         {/* Filter Buttons */}
-        <Card className="mb-6 dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated border-2 dark:border-border-dark">
+        <Card className="mb-6">
           <div className="flex items-center justify-between" dir={isRTL ? 'rtl' : 'ltr'}>
             <div className="flex items-center gap-2">
               <Calendar size={20} className="text-text-secondary-light dark:text-text-secondary-dark" />
@@ -167,9 +167,9 @@ export default function SalesReportPage() {
 
         {/* Loading State */}
         {status === 'loading' && (
-          <Card className="dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated border-2 dark:border-primary-900/30">
+          <Card>
             <div className="flex flex-col items-center justify-center py-16">
-              <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-200 dark:border-primary-800 border-t-primary-500 mb-4 shadow-glow-primary dark:shadow-glow-primary"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-200 dark:border-primary-600 border-t-primary-500 dark:border-t-primary-400 mb-4 shadow-glow-primary"></div>
               <p className="text-text-secondary-light dark:text-text-secondary-dark font-medium">{isRTL ? 'جاري التحميل...' : 'Loading...'}</p>
             </div>
           </Card>
@@ -177,9 +177,9 @@ export default function SalesReportPage() {
 
         {/* Empty State */}
         {status === 'success' && salesData.length === 0 && (
-          <Card className="dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated">
+          <Card>
             <div className="flex flex-col items-center justify-center py-16">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-border-light to-surface dark:from-border-dark dark:to-background-dark flex items-center justify-center mb-4 shadow-soft dark:shadow-inner-dark">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-border-light to-surface dark:from-surface-dark-hover dark:to-surface-dark flex items-center justify-center mb-4 shadow-soft">
                 <BarChart3 size={40} className="text-text-muted-light dark:text-text-muted-dark" />
               </div>
               <h3 className="text-lg font-semibold text-text-primary-light dark:text-text-primary-dark mb-2">
@@ -194,7 +194,7 @@ export default function SalesReportPage() {
 
         {/* Sales Data Table */}
         {status === 'success' && salesData.length > 0 && (
-          <Card className="overflow-hidden dark:bg-gradient-to-br dark:from-surface-dark dark:to-background-dark-elevated border-2 dark:border-border-dark">
+          <Card className="overflow-hidden">
             <div className="mb-4 flex items-center gap-2">
               <BarChart3 size={20} className="text-primary-600 dark:text-primary-400" />
               <h3 className="text-lg font-bold text-text-primary-light dark:text-text-primary-dark">
@@ -203,7 +203,7 @@ export default function SalesReportPage() {
             </div>
             <div className="overflow-x-auto rounded-lg">
               <table className="w-full" dir={isRTL ? 'rtl' : 'ltr'}>
-                <thead className="bg-gradient-to-r from-background-light to-surface dark:from-background-dark dark:to-surface-dark">
+                <thead className="bg-gradient-to-r from-background-light to-surface dark:from-surface-dark-hover dark:to-surface-dark">
                   <tr>
                     <th className="px-6 py-3 text-right text-xs font-semibold text-text-primary-light dark:text-text-primary-dark uppercase tracking-wider">
                       {isRTL ? 'التاريخ' : 'Date'}
@@ -263,7 +263,7 @@ export default function SalesReportPage() {
                     );
                   })}
                 </tbody>
-                <tfoot className="bg-gradient-to-r from-background-light to-surface dark:from-background-dark-elevated dark:to-surface-dark border-t-2 border-primary-500 dark:border-primary-400">
+                <tfoot className="bg-gradient-to-r from-background-light to-surface dark:from-surface-dark-hover dark:to-surface-dark border-t-2 border-primary-500 dark:border-primary-400">
                   <tr>
                     <td className="px-6 py-4 font-bold text-text-primary-light dark:text-text-primary-dark">
                       {isRTL ? 'الإجمالي' : 'Total'}

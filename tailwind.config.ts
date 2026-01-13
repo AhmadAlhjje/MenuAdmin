@@ -12,14 +12,14 @@ const config: Config = {
         background: {
           DEFAULT: '#FFFFFF',
           light: '#FFF8F5',
-          dark: '#0A0E14',
-          'dark-elevated': '#151922',
+          dark: '#0F172A',
+          'dark-elevated': '#1E293B',
         },
         surface: {
           DEFAULT: '#FFFFFF',
           light: '#FAFBFC',
-          dark: '#1A1F2E',
-          'dark-hover': '#222936',
+          dark: '#1E293B',
+          'dark-hover': '#334155',
         },
 
         // الألوان الرئيسية - البرتقالي
@@ -85,6 +85,21 @@ const config: Config = {
           DEFAULT: '#FF5252',
         },
 
+        // Danger (نفس الخطأ)
+        danger: {
+          50: '#FFF1F0',
+          100: '#FFDDDB',
+          200: '#FFBBB8',
+          300: '#FF9994',
+          400: '#FF7770',
+          500: '#FF5252',
+          600: '#F44336',
+          700: '#E63946',
+          800: '#D32F2F',
+          900: '#B71C1C',
+          DEFAULT: '#FF5252',
+        },
+
         // التحذير
         warning: {
           50: '#FFF8F0',
@@ -104,15 +119,15 @@ const config: Config = {
         text: {
           primary: {
             light: '#1A202C',
-            dark: '#F7FAFC',
+            dark: '#F1F5F9',
           },
           secondary: {
             light: '#4A5568',
-            dark: '#E2E8F0',
+            dark: '#CBD5E1',
           },
           muted: {
             light: '#718096',
-            dark: '#CBD5E0',
+            dark: '#94A3B8',
           },
         },
 
@@ -120,7 +135,7 @@ const config: Config = {
         border: {
           light: '#E2E8F0',
           DEFAULT: '#CBD5E0',
-          dark: '#2D3748',
+          dark: '#475569',
         },
 
         // ألوان إضافية للتنوع

@@ -108,27 +108,27 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-secondary-900 dark:to-secondary-800 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 px-4">
       <div className="w-full max-w-md">
         {/* Logo/Title */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
-            <div className="bg-primary-500 text-white p-3 rounded-lg">
+            <div className="bg-gradient-to-br from-primary-500 to-primary-600 text-white p-3 rounded-lg shadow-lg dark:shadow-2xl dark:shadow-primary-500/30">
               <LogIn size={28} />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-secondary-900 dark:text-secondary-100 mb-2">
+          <h1 className="text-3xl font-bold text-secondary-900 dark:text-slate-100 mb-2">
             {t('login.title') || 'Menu Admin'}
           </h1>
-          <p className="text-secondary-600 dark:text-secondary-400">
+          <p className="text-secondary-600 dark:text-slate-400">
             {t('login.subtitle') || 'Restaurant Management System'}
           </p>
         </div>
 
         {/* Login Form */}
-        <div className="bg-white dark:bg-secondary-800 rounded-lg shadow-lg p-8">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-2xl dark:shadow-black/50 dark:border dark:border-slate-700 p-8">
           {errors.general && (
-            <div className="mb-4 p-4 bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-800 rounded-lg">
+            <div className="mb-4 p-4 bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-700 rounded-lg">
               <p className="text-danger-600 dark:text-danger-400 text-sm">{errors.general}</p>
             </div>
           )}
@@ -136,7 +136,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-secondary-900 dark:text-secondary-100 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-secondary-900 dark:text-slate-100 mb-2">
                 <div className="flex items-center gap-2">
                   <Mail size={16} />
                   {t('login.email') || 'Email Address'}
@@ -156,7 +156,7 @@ export default function LoginPage() {
 
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-secondary-900 dark:text-secondary-100 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-secondary-900 dark:text-slate-100 mb-2">
                 <div className="flex items-center gap-2">
                   <Lock size={16} />
                   {t('login.password') || 'Password'}
@@ -197,7 +197,7 @@ export default function LoginPage() {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-sm text-secondary-600 dark:text-secondary-400 mt-6">
+        <p className="text-center text-sm text-secondary-600 dark:text-slate-400 mt-6">
           {t('login.footer') || '© 2024 Menu Admin. All rights reserved.'}
         </p>
       </div>
