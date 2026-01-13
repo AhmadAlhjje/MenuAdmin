@@ -117,16 +117,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
   const sidebarContent = (
     <>
       {/* Logo and Close Button */}
-      <div className="p-6 border-b border-border-light dark:border-border-dark bg-gradient-to-r from-background-light to-surface dark:from-background-dark-elevated dark:to-surface-dark relative overflow-hidden">
-        {/* تأثير وهج خلفي في Dark Mode */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent dark:from-primary-500/10 dark:to-transparent pointer-events-none"></div>
+      <div className="p-6 border-b-2 border-border-light dark:border-border-dark bg-gradient-to-r from-primary-600 to-primary-500 dark:from-primary-700 dark:to-primary-600 relative overflow-hidden shadow-lg">
         <div className="flex items-center justify-between relative z-10">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-400 dark:to-primary-500 bg-clip-text text-transparent drop-shadow-lg">
+          <h1 className="text-2xl font-black text-white drop-shadow-lg tracking-tight">
             MenuAdmin
           </h1>
           <button
             onClick={onToggle}
-            className="p-2 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition-all text-text-primary-light dark:text-text-primary-dark hover:scale-110 active:scale-95 dark:hover:shadow-glow-primary"
+            className="p-2 hover:bg-white/20 rounded-lg transition-all text-white hover:scale-110 active:scale-95"
             aria-label="Close sidebar"
           >
             <X size={24} />
@@ -144,7 +142,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
             <div key={idx}>
               {hasItems ? (
                 <>
-                  <p className="text-xs font-semibold text-text-muted-light dark:text-text-muted-dark uppercase px-3 py-2">
+                  <p className="text-xs font-bold text-text-primary-light dark:text-text-primary-dark uppercase px-4 py-2 tracking-wide">
                     {route.label}
                   </p>
                   <div className="space-y-1">
@@ -157,17 +155,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
                           href={item.href}
                           onClick={(e) => handleNavigation(item.href, e)}
                           className={clsx(
-                            'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200',
+                            'flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200',
                             isActive(item.href)
-                              ? 'bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 text-primary-600 dark:text-primary-400 font-semibold border-l-4 border-l-primary-500 shadow-soft'
-                              : 'text-text-secondary-light dark:text-text-secondary-dark hover:bg-gradient-to-r hover:from-background-light hover:to-surface dark:hover:from-background-dark dark:hover:to-surface-dark hover:text-primary-500 dark:hover:text-primary-400',
+                              ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white font-bold shadow-lg shadow-primary-500/30 dark:shadow-primary-500/40'
+                              : 'text-text-secondary-light dark:text-text-secondary-dark hover:bg-gradient-to-r hover:from-primary-500/10 hover:to-primary-400/10 dark:hover:from-primary-500/20 dark:hover:to-primary-400/20 hover:text-primary-600 dark:hover:text-primary-400 font-medium',
                             isLoadingThis && 'opacity-70 pointer-events-none'
                           )}
                         >
                           {isLoadingThis ? (
-                            <Loader2 size={20} className="flex-shrink-0 animate-spin" />
+                            <Loader2 size={22} className="flex-shrink-0 animate-spin" />
                           ) : (
-                            <ItemIcon size={20} className="flex-shrink-0" />
+                            <ItemIcon size={22} className="flex-shrink-0" />
                           )}
                           <span className="text-sm">{item.label}</span>
                         </Link>
@@ -183,17 +181,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
                       href={route.href || '#'}
                       onClick={(e) => handleNavigation(route.href || '#', e)}
                       className={clsx(
-                        'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200',
+                        'flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200',
                         isActive(route.href || '')
-                          ? 'bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 text-primary-600 dark:text-primary-400 font-semibold border-l-4 border-l-primary-500 shadow-soft'
-                          : 'text-text-secondary-light dark:text-text-secondary-dark hover:bg-gradient-to-r hover:from-background-light hover:to-surface dark:hover:from-background-dark dark:hover:to-surface-dark hover:text-primary-500 dark:hover:text-primary-400',
+                          ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white font-bold shadow-lg shadow-primary-500/30 dark:shadow-primary-500/40'
+                          : 'text-text-secondary-light dark:text-text-secondary-dark hover:bg-gradient-to-r hover:from-primary-500/10 hover:to-primary-400/10 dark:hover:from-primary-500/20 dark:hover:to-primary-400/20 hover:text-primary-600 dark:hover:text-primary-400 font-medium',
                         isLoadingThis && 'opacity-70 pointer-events-none'
                       )}
                     >
                       {isLoadingThis ? (
-                        <Loader2 size={20} className="flex-shrink-0 animate-spin" />
+                        <Loader2 size={22} className="flex-shrink-0 animate-spin" />
                       ) : (
-                        Icon && <Icon size={20} className="flex-shrink-0" />
+                        Icon && <Icon size={22} className="flex-shrink-0" />
                       )}
                       <span className="text-sm">{route.label}</span>
                     </Link>
@@ -212,12 +210,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
         <button
           onClick={toggleTheme}
           className={clsx(
-            'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 relative z-10',
-            'text-text-secondary-light dark:text-text-secondary-dark hover:bg-gradient-to-r hover:from-primary-50 hover:to-primary-100 dark:hover:from-primary-900/30 dark:hover:to-primary-800/30 hover:text-primary-500 dark:hover:text-primary-400 shadow-soft hover:scale-105 active:scale-95 dark:shadow-dark dark:hover:shadow-glow-primary'
+            'w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 relative z-10',
+            'text-text-primary-light dark:text-text-primary-dark hover:bg-gradient-to-r hover:from-primary-500/10 hover:to-primary-400/10 dark:hover:from-primary-500/20 dark:hover:to-primary-400/20 hover:text-primary-600 dark:hover:text-primary-400 shadow-soft hover:scale-105 active:scale-95 dark:shadow-dark font-medium'
           )}
         >
-          {isDark ? <Sun size={20} className="flex-shrink-0" /> : <Moon size={20} className="flex-shrink-0" />}
-          <span className="text-sm font-medium">{isDark ? t('common.lightMode') : t('common.darkMode')}</span>
+          {isDark ? <Sun size={22} className="flex-shrink-0" /> : <Moon size={22} className="flex-shrink-0" />}
+          <span className="text-sm">{isDark ? t('common.lightMode') : t('common.darkMode')}</span>
         </button>
 
         <button
@@ -229,22 +227,22 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle }) =
             htmlElement.dir = i18n.language === 'en' ? 'rtl' : 'ltr';
           }}
           className={clsx(
-            'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 relative z-10',
-            'bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 text-primary-600 dark:text-primary-400 hover:from-primary-100 hover:to-primary-200 dark:hover:from-primary-900/40 dark:hover:to-primary-800/40 shadow-soft hover:scale-105 active:scale-95 dark:shadow-dark dark:hover:shadow-glow-primary'
+            'w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 relative z-10',
+            'text-text-primary-light dark:text-text-primary-dark hover:bg-gradient-to-r hover:from-primary-500/10 hover:to-primary-400/10 dark:hover:from-primary-500/20 dark:hover:to-primary-400/20 hover:text-primary-600 dark:hover:text-primary-400 shadow-soft hover:scale-105 active:scale-95 dark:shadow-dark'
           )}
         >
-          <span className="flex-shrink-0 text-lg">🌐</span>
+          <span className="flex-shrink-0 text-xl">🌐</span>
           <span>{i18n.language === 'en' ? 'العربية' : 'English'}</span>
         </button>
 
         <button
           onClick={handleLogout}
           className={clsx(
-            'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 relative z-10',
-            'text-error-600 dark:text-error-400 hover:bg-gradient-to-r hover:from-error-50 hover:to-error-100 dark:hover:from-error-900/30 dark:hover:to-error-800/30 shadow-soft hover:scale-105 active:scale-95 dark:shadow-dark dark:hover:shadow-glow-accent'
+            'w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-bold transition-all duration-300 relative z-10',
+            'bg-gradient-to-r from-error-600 to-error-500 text-white shadow-lg shadow-error-500/30 dark:shadow-error-500/40 hover:from-error-700 hover:to-error-600 hover:scale-105 active:scale-95'
           )}
         >
-          <LogOut size={20} className="flex-shrink-0" />
+          <LogOut size={22} className="flex-shrink-0" />
           <span>{t('common.logout')}</span>
         </button>
       </div>
