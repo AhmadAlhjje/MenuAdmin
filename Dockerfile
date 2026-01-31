@@ -28,7 +28,7 @@ COPY . .
 # إنشاء ملف .env.production إذا لم يكن موجوداً
 RUN if [ ! -f .env.production ]; then \
         echo "NODE_ENV=production" > .env.production && \
-        echo "NEXT_PUBLIC_API_URL=http://localhost:3003" >> .env.production; \
+        echo "NEXT_PUBLIC_API_URL=http://217.76.53.136:7050" >> .env.production; \
     fi
 
 # بناء المشروع
